@@ -1,18 +1,22 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const Catway = new Schema(
+const Reservation = new Schema(
   {
     catwayNumber: {
-      type: Number,
-      required: true,
-    },
-    type: {
       type: String,
       required: true,
     },
-    catwayState: {
+    clientName: {
       type: String,
+      required: true,
+    },
+    boatName: {
+      type: String,
+      required: true,
+    },
+    endDate: {
+      type: Date,
       required: true,
     },
   },
