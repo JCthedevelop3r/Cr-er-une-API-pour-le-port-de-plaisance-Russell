@@ -20,3 +20,5 @@ const Catway = new Schema(
     timestamps: true,
   }
 );
+
+module.exports = mongoose.model("Catway", Catway);
