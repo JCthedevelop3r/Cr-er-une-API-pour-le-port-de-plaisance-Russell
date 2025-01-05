@@ -3,12 +3,19 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "env-cmd -f ./env/.env nodemon ./bin/www",
+    "dev": "env-cmd -f ./env/.env.dev nodemon ./bin/www",
+    "prod": "env-cmd -f ./env/.env.prod nodemon ./bin/www"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
-    "morgan": "~1.9.1"
+    "mongodb": "^6.12.0",
+    "morgan": "~1.9.1",
+    "nodemon": "^3.1.9"
+  },
+  "devDependencies": {
+    "env-cmd": "^10.1.0"
   }
 }
