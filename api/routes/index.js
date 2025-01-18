@@ -7,11 +7,9 @@ const docRoute = require("../routes/doc");
 
 // Route de la page d'accueil / de connexion
 router.get("/", function (req, res, next) {
-  res.status(200).json({
-    name: process.env.APP_NAME,
-    version: "1.0",
-    status: 200,
-    message: "Bienvenue sur l'API PPR !",
+  res.render("index", {
+    title: "Express avec EJS",
+    message: "Bienvenue sur Express !",
   });
 });
 

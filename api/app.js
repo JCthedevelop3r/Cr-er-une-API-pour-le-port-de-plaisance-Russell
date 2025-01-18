@@ -2,6 +2,7 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cors = require("cors");
+const path = require("path");
 
 const indexRouter = require("./routes/index");
 const mongodb = require("./db/mongo");
@@ -10,6 +11,8 @@ mongodb.initClientDbConnection();
 
 const app = express();
 
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 app.use(
   cors({
     exposedHeaders: ["Authorization"],
