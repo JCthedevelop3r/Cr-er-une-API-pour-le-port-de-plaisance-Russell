@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Mon Application</h1>
+      <nav>
+        <a href="/">Accueil</a>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/documentation">Documentation</a>
+      </nav>
+    </header>
+
+    <main>
+      <%- body %>
+      <!-- C'est ici que le contenu de la page spécifique sera injecté -->
+    </main>
+
+    <footer>
+      <p>© 2025 Mon API PPR</p>
+    </footer>
+  </body>
+</html>
