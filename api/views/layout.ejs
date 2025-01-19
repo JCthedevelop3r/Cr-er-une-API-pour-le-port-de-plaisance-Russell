@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="left-part-header-container">
+        <a href="/dashboard">
+          <p>Port de plaisance Russell</p>
+        </a>
+      </div>
+      <div class="right-part-header-container">
+        <nav>
+          <a href="/reservations">Réservations</a>
+          <a href="/catways">Catways</a>
+          <a href="/dashboard">Tableau de bord</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <%- body %>
+      <!-- C'est ici que le contenu de la page spécifique sera injecté -->
+    </main>
+
+    <footer>
+      <p>Port de plaisance Russell</p>
+    </footer>
+  </body>
+</html>

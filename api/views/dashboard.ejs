@@ -1,0 +1,236 @@
+<div class="dashboard-container">
+  <div class="top-of-page-container">
+    <h1><%= title%></h1>
+    <a
+      href="/documentation"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="link-api-documentation"
+    >
+      <button>Voir la documentation</button>
+    </a>
+    <div class="link-list-pages-container">
+      <a href="/catways">Voir la liste des catways</a>
+      <a href="">Voir la liste des réservations</a>
+    </div>
+  </div>
+  <div class="bottom-of-the-page-container">
+    <div class="btn-form-lists-container">
+      <div class="btn-users-form-container">
+        <div class="btn-form-create-user-container">
+          <button class="btn-form-create-user">Créer un utilisateur</button>
+        </div>
+        <div class="btn-form-update-user-container">
+          <button class="btn-form-update-user">Modifier un utilisateur</button>
+        </div>
+        <div class="btn-form-delete-user-container">
+          <button class="btn-form-delete-user">Supprimer un utilisateur</button>
+        </div>
+      </div>
+      <div class="btn-catways-form-container">
+        <div class="btn-form-create-catway-container">
+          <button class="btn-form-create-catway">Créer un catway</button>
+        </div>
+        <div class="btn-form-update-catway-state-container">
+          <button class="btn-form-update-catway-state">
+            Modifier l'état d'un catway
+          </button>
+        </div>
+        <div class="btn-form-delete-catway-state-container">
+          <button class="btn-form-delete-catway-state">
+            Supprimer un catway
+          </button>
+        </div>
+        <div class="btn-form-catway-details-state-container">
+          <button class="btn-form-catway-details-state">
+            Afficher les détails d'un catway
+          </button>
+        </div>
+      </div>
+      <div class="btn-reservations-form-container">
+        <div class="btn-form-save-reservation-container">
+          <button class="btn-form-save-reservation">
+            Enregistrer une réservation
+          </button>
+        </div>
+        <div class="btn-form-delete-reservation-container">
+          <button class="btn-form-delete-reservation">
+            Supprimer une réservation
+          </button>
+        </div>
+        <div class="btn-form-display-details-reservation-container">
+          <button class="btn-form-display-details-reservation">
+            Afficher une réservation
+          </button>
+        </div>
+      </div>
+      <div class="form-list">
+        <div class="users-form-list-container">
+          <div class="form-create-user-container">
+            <h2 class="h2-form-create-user">Créer un utilisateur</h2>
+            <form action="" method="post" class="form-create-user">
+              <label for="name">Nom :</label>
+              <input type="text" name="name" id="name" required />
+              <label for="email">E-mail :</label>
+              <input type="email" name="email" id="email" required />
+              <label for="password">Mot de passe :</label>
+              <input type="password" name="password" id="password" required />
+              <button type="submit">Valider</button>
+            </form>
+          </div>
+          <div class="form-update-user-container">
+            <h2 class="h2-form-update-user">Modifier un utilisateur</h2>
+            <form action="" method="post" class="form-update-user">
+              <label for="userId">ID :</label>
+              <input type="text" name="userId" id="userId" required />
+              <label for="name">Nom :</label>
+              <input type="text" name="name" id="name" />
+              <label for="email">E-mail :</label>
+              <input type="email" name="email" id="email" />
+              <label for="password">Mot de passe :</label>
+              <input type="password" name="password" id="password" />
+              <button type="submit">Valider</button>
+            </form>
+          </div>
+          <div class="form-delete-user-container">
+            <h2 class="h2-form-delete-user">Supprimer un utilisateur</h2>
+            <form action="" method="post" class="form-delete-user">
+              <label for="userId">ID :</label>
+              <input type="text" name="userId" id="userId" required />
+              <label for="name">Nom :</label>
+              <input type="text" name="name" id="name" required />
+              <label for="email">E-mail :</label>
+              <input type="email" name="email" id="email" required />
+              <label for="password">Mot de passe :</label>
+              <input type="password" name="password" id="password" required />
+              <button type="submit">Valider</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="catways-form-list-container">
+      <div class="form-create-catway-container">
+        <h2 class="h2-form-create-watway">Créer un catway</h2>
+        <form action="" method="post">
+          <label for="catwayNumber">Numéro du catway :</label>
+          <input type="text" name="catwayNumber" id="catwayNumber" />
+          <p>Type :</p>
+          <label for="short">Court</label>
+          <input type="radio" name="type" id="short" />
+          <label for="long">Long</label>
+          <input type="radio" name="type" id="long" />
+          <label for="catwayState">État :</label>
+          <textarea
+            name="catwayState"
+            id="catwayState"
+            rows="4"
+            cols="50"
+            placeholder="Décrivez l'état du catway..."
+          ></textarea>
+          <button type="submit">Valider</button>
+        </form>
+      </div>
+      <div class="form-catway-state-container">
+        <h2 class="h2-form-catway-state">
+          Modifier la description de l'état d'un catway
+        </h2>
+        <form action="" method="post">
+          <label for="catwayNumber">Numéro du catway :</label>
+          <input type="text" name="catwayNumber" id="catwayNumber" />
+          <label for="catwayState">État :</label>
+          <textarea
+            name="catwayState"
+            id="catwayState"
+            rows="4"
+            cols="50"
+            placeholder="Décrivez l'état du catway..."
+          ></textarea>
+          <button type="submit">Valider</button>
+        </form>
+      </div>
+      <div class="form-delete-catway-container">
+        <h2 class="h2-delete-catway">Supprimer un catway</h2>
+        <form action="" method="post">
+          <label for="catwayNumber">Numéro du catway :</label>
+          <input type="text" name="catwayNumber" id="catwayNumber" required />
+          <button type="submit">Valider</button>
+        </form>
+      </div>
+      <div class="form-display-catway-details-container">
+        <h2 class="h2-display-catway-details">
+          Afficher les détails d'un catway
+        </h2>
+        <form action="" method="post">
+          <label for="catwayNumber">Numéro du catway :</label>
+          <select name="catwayNumber" id="catwayNumber" required>
+            <!-- Exemple temporaire -->
+            <option value="catway1">catway1</option>
+            <option value="catway2">catway2</option>
+            <option value="catway3">catway3</option>
+          </select>
+        </form>
+        <h3>Type :</h3>
+        <p>Court/Long</p>
+        <h3>État :</h3>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et quae
+          quaerat iure, eligendi maxime saepe!
+        </p>
+      </div>
+    </div>
+    <div class="reservations-form-list-container">
+      <div class="form-save-reservation-container">
+        <h2 class="h2-save-reservation">Enregistrer une réservation</h2>
+        <form action="" method="post">
+          <label for="catwayNumber">Numéro du catway :</label>
+          <input type="text" name="catwayNumber" id="catwayNumber" />
+          <label for="clientName">Nom du client :</label>
+          <input type="text" name="clientName" id="clientName" />
+          <label for="boatName">Nom du bateau amarré :</label>
+          <select name="boatName" id="boatName">
+            <!-- Exemple temporaire -->
+            <option value="boat1">bateau1</option>
+            <option value="boat2">bateau2</option>
+            <option value="boat3">bateau3</option>
+          </select>
+          <label for="checkIn">Date de début de réservation :</label>
+          <input type="date" name="checkIn" id="checkIn" />
+          <label for="checkOut">Date de fin de réservation :</label>
+          <input type="date" name="checkOut" id="checkOut" />
+          <button type="submit">Valider</button>
+        </form>
+      </div>
+      <div class="form-delete-reservation-container">
+        <h2>Supprimer une réservation</h2>
+        <form action="" method="post">
+          <label for="reservationId">ID :</label>
+          <input type="text" name="reservationId" id="reservationId" />
+          <button type="submit">Valider</button>
+        </form>
+      </div>
+      <div class="form-display-details-reservation-container">
+        <h2>Afficher les détails d'une réservation</h2>
+        <form action="" method="post">
+          <!-- Exemple temporaire -->
+          <label for="reservationId">ID :</label>
+          <select name="reservationId" id="reservationId">
+            <option value="reservation1">Réservation1</option>
+            <option value="reservation2">Réservation2</option>
+            <option value="reservation3">Réservation3</option>
+          </select>
+          <h3>Numéro du catway :</h3>
+          <p>catway1/catway2/catway3</p>
+          <h3>Nom du client :</h3>
+          <p>PrénomNOM</p>
+          <h3>Nom du bateau :</h3>
+          <p>bateau1/bateau2/bateau3</p>
+          <h3>Date de début de réservation :</h3>
+          <p>xx-xx-xxxx</p>
+          <h3>Date de fin de réservation :</h3>
+          <p>xx-xx-xxxx</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
