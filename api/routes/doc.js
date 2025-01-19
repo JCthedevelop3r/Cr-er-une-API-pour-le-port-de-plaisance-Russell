@@ -34,10 +34,8 @@ const documentationData = [
 
 // Route pour afficher la documentation
 router.get("/", (req, res) => {
-  res.status(200).json({
-    name: "Documentation de l'API PPR",
-    version: "1.0",
-    routes: documentationData,
+  res.render("doc", {
+    title: "Documentation API PPR",
   });
 });
 
