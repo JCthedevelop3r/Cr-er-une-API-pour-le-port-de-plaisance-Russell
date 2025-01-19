@@ -26,12 +26,12 @@ router.get(
   }
 );
 // Route pour créer un catway
-router.post("/catways" /*service.createCatway*/);
+router.post("/" /*service.createCatway*/);
 // Routes pour modifier la description de l'état d'un catway en particulier
-router.put("/catways/:id" /*service.putUpdateCatway*/);
-router.patch("/catways/:id" /*service.patchUpdateCatway*/);
+router.put("/:id" /*service.putUpdateCatway*/);
+router.patch("/:id" /*service.patchUpdateCatway*/);
 // Route pour supprimer un catway
-router.delete("/catways/:id" /*service.deleteCatway*/);
+router.delete("/:id" /*service.deleteCatway*/);
 
 // Routes pour les réservations
 
@@ -56,10 +56,10 @@ router.get(
   }
 );
 // Route pour créer une réservation
-router.post("/catways/:id/reservations" /*service.createReservation*/);
+router.post("/:id/reservations" /*service.createReservation*/);
 // Route pour supprimer une réservation
 router.delete(
-  "/catways/:id/reservations/:idReservation"
+  "/:id/reservations/:idReservation"
   /*service.deleteReservation*/
 );
 
