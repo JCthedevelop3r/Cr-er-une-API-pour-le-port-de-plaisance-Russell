@@ -6,7 +6,7 @@ const path = require("path");
 const expressLayouts = require("express-ejs-layouts");
 
 const indexRouter = require("./routes/index");
-const mongodb = require("./db/mongo");
+const mongodb = require("./mongo");
 
 mongodb.initClientDbConnection();
 
