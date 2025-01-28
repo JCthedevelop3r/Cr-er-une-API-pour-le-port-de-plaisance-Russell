@@ -1,4 +1,5 @@
 const User = require("../models/user");
+const Catway = require("../models/catway");
 const bcrypt = require("bcrypt");
 
 async function createUser(req, res) {
@@ -87,4 +88,45 @@ async function deleteUser(req, res) {
   }
 }
 
-module.exports = { createUser, updateUser, deleteUser };
+async function createCatway(req, res) {
+  try {
+    // Calculer le prochain numéro du catway
+    const lastCatway = await Catway.findOne().sort({ catwayNumber: -1 });
+    const nextCatwayNumber = lastCatway ? lastCatway.catwayNumber + 1 : 1;
+
+    // Création du nouveau catway
+    const newCatway = new Catway({
+      catwayNumber: nextCatwayNumber,
+      type: req.body.type,
+      catwayState: req.body.catwayState,
+    });
+
+    // Sauvegarde en base de données
+    await newCatway.save();
+
+    // Redirection vers la liste des catways
+    res.redirect("/dashboard");
+  } catch (err) {
+    console.error("Erreur lors de la création du catway :", err);
+    res.status(500).send("Erreur serveur lors de la création du catway");
+  }
+}
+
+async function getNextCatwayNumber(req, res) {
+  try {
+    const lastCatway = await Catway.findOne().sort({ catwayNumber: -1 });
+    const nextCatwayNumber = lastCatway ? lastCatway.catwayNumber + 1 : 1;
+    res.json({ nextCatwayNumber }); // Retourne le numéro dans une réponse JSON
+  } catch (err) {
+    console.error("Erreur lors du calcul du numéro du catway :", err);
+    res.status(500).send("Erreur serveur");
+  }
+}
+
+module.exports = {
+  createUser,
+  updateUser,
+  deleteUser,
+  createCatway,
+  getNextCatwayNumber,
+};

@@ -120,14 +120,20 @@
     <div class="catways-form-list-container">
       <div class="form-create-catway-container">
         <h2 class="h2-form-create-watway">Créer un catway</h2>
-        <form action="" method="post">
+        <form action="/dashboard/create-catway" method="post">
           <label for="catwayNumber">Numéro du catway :</label>
-          <input type="text" name="catwayNumber" id="catwayNumber" />
+          <input
+            type="text"
+            name="catwayNumber"
+            id="catwayNumber"
+            value=""
+            readonly
+          />
           <p>Type :</p>
           <label for="short">Court</label>
-          <input type="radio" name="type" id="short" />
+          <input type="radio" name="type" id="short" value="short" required />
           <label for="long">Long</label>
-          <input type="radio" name="type" id="long" />
+          <input type="radio" name="type" id="long" value="long" required />
           <label for="catwayState">État :</label>
           <textarea
             name="catwayState"
@@ -135,6 +141,7 @@
             rows="4"
             cols="50"
             placeholder="Décrivez l'état du catway..."
+            required
           ></textarea>
           <button type="submit">Valider</button>
         </form>
@@ -242,3 +249,19 @@
     </div>
   </div>
 </div>
+
+<script>
+  // Fonction pour récupérer dynamiquement le numéro de catway
+  window.onload = async function () {
+    try {
+      const response = await fetch("/dashboard/next-catway-number");
+      const data = await response.json();
+      document.getElementById("catwayNumber").value = data.nextCatwayNumber;
+    } catch (error) {
+      console.error(
+        "Erreur lors de la récupération du numéro de catway :",
+        error
+      );
+    }
+  };
+</script>

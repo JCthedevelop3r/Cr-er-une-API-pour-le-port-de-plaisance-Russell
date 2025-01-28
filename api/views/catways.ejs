@@ -9,18 +9,14 @@
       </tr>
     </thead>
     <tbody>
+      <% catways.forEach(catway => { %>
       <tr>
-        <td class="td-catway-number">1</td>
+        <td class="td-catway-number">
+          <a href="/catways/<%= catway._id %>"><%= catway.catwayNumber %></a>
+        </td>
         <td class="td-availability">oui/non</td>
       </tr>
-      <tr>
-        <td class="td-catway-number">2</td>
-        <td class="td-availability">oui/non</td>
-      </tr>
-      <tr>
-        <td class="td-catway-number">3</td>
-        <td class="td-availability">oui/non</td>
-      </tr>
+      <% }); %>
     </tbody>
   </table>
 </div>

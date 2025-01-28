@@ -1,30 +1,17 @@
 const express = require("express");
 const router = express.Router();
 
+const catwaysControllers = require("../controllers/catways");
 const service = require("../services/catways");
 
 // Routes pour les catways
 
 // Route pour récupérer la liste des catways
-router.get(
-  "/",
-  /*service.getCatwaysList,*/ (req, res) => {
-    res.render("catways", {
-      title: "Liste des catways",
-      catways: res.locals.catways,
-    });
-  }
-);
+router.get("/", catwaysControllers.getCatwaysList);
+
 // Route pour récupérer les détails d'un catway en particulier
-router.get(
-  "/:id",
-  /*service.getCatway,*/ (req, res) => {
-    res.render("catway-details", {
-      title: "Détails catway",
-      catways: res.locals.catways,
-    });
-  }
-);
+router.get("/:id", catwaysControllers.getCatwayDetails);
+
 // Route pour créer un catway
 router.post("/" /*service.createCatway*/);
 // Routes pour modifier la description de l'état d'un catway en particulier

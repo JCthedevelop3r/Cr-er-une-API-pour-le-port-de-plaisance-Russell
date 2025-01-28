@@ -17,4 +17,10 @@ router.post("/update-user", dashboardController.updateUser);
 // Route pour supprimer un utilisateur
 router.post("/delete-user", dashboardController.deleteUser);
 
+// Route pour créer un catway
+router.post("/create-catway", dashboardController.createCatway);
+
+// Route pour obtenir le prochain numéro de catway
+router.get("/next-catway-number", dashboardController.getNextCatwayNumber);
+
 module.exports = router;
