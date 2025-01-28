@@ -25,7 +25,7 @@ app.use(
 );
 app.use(logger("dev"));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use("/", indexRouter);
@@ -34,12 +34,6 @@ app.use(function (req, res, next) {
   res
     .status(404)
     .json({ name: "API", version: "1.0", status: 404, message: "not_found" });
-});
-
-app._router.stack.forEach((r) => {
-  if (r.route && r.route.path) {
-    console.log(r.route.path);
-  }
 });
 
 module.exports = app;

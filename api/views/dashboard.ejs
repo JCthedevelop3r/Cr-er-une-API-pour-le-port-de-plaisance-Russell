@@ -68,7 +68,11 @@
         <div class="users-form-list-container">
           <div class="form-create-user-container">
             <h2 class="h2-form-create-user">Créer un utilisateur</h2>
-            <form action="" method="post" class="form-create-user">
+            <form
+              action="/dashboard/create-user"
+              method="post"
+              class="form-create-user"
+            >
               <label for="name">Nom :</label>
               <input type="text" name="name" id="name" required />
               <label for="email">E-mail :</label>
@@ -80,29 +84,33 @@
           </div>
           <div class="form-update-user-container">
             <h2 class="h2-form-update-user">Modifier un utilisateur</h2>
-            <form action="" method="post" class="form-update-user">
-              <label for="userId">ID :</label>
-              <input type="text" name="userId" id="userId" required />
-              <label for="name">Nom :</label>
-              <input type="text" name="name" id="name" />
-              <label for="email">E-mail :</label>
-              <input type="email" name="email" id="email" />
-              <label for="password">Mot de passe :</label>
-              <input type="password" name="password" id="password" />
-              <button type="submit">Valider</button>
-            </form>
-          </div>
-          <div class="form-delete-user-container">
-            <h2 class="h2-form-delete-user">Supprimer un utilisateur</h2>
-            <form action="" method="post" class="form-delete-user">
-              <label for="userId">ID :</label>
+            <form
+              action="/dashboard/update-user"
+              method="post"
+              class="form-update-user"
+            >
+              <label for="userId">Entrez l'identifiant :</label>
               <input type="text" name="userId" id="userId" required />
               <label for="name">Nom :</label>
               <input type="text" name="name" id="name" required />
               <label for="email">E-mail :</label>
               <input type="email" name="email" id="email" required />
-              <label for="password">Mot de passe :</label>
-              <input type="password" name="password" id="password" required />
+              <button type="submit">Valider</button>
+            </form>
+          </div>
+          <div class="form-delete-user-container">
+            <h2 class="h2-form-delete-user">Supprimer un utilisateur</h2>
+            <form
+              action="/dashboard/delete-user"
+              method="post"
+              class="form-delete-user"
+            >
+              <label for="userId">Entrez l'identifiant :</label>
+              <input type="text" name="userId" id="userId" required />
+              <label for="name">Nom :</label>
+              <input type="text" name="name" id="name" required />
+              <label for="email">E-mail :</label>
+              <input type="email" name="email" id="email" required />
               <button type="submit">Valider</button>
             </form>
           </div>
