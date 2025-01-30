@@ -11,12 +11,6 @@ async function createUser(req, res) {
       return res.status(400).send("Tous les champs sont requis.");
     }
 
-    // Vérifier si l'utilisateur existe déjà
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.status(400).send("Cet email est déjà utilisé.");
-    }
-
     // Hasher le mot de passe avant de l'enregistrer
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -104,7 +98,7 @@ async function createCatway(req, res) {
     // Sauvegarde en base de données
     await newCatway.save();
 
-    // Redirection vers la liste des catways
+    // Redirection vers le tableau de bord
     res.redirect("/dashboard");
   } catch (err) {
     console.error("Erreur lors de la création du catway :", err);
@@ -123,10 +117,47 @@ async function getNextCatwayNumber(req, res) {
   }
 }
 
+async function updateCatwayState(req, res) {
+  const { catwayId, catwayState } = req.body;
+
+  try {
+    // Vérification des données
+    if (!catwayId || !catwayState) {
+      return res.status(400).json({ error: "ID Catway et État sont requis." });
+    }
+
+    // Mise à jour de l'état du Catway
+    const updatedCatway = await Catway.findOneAndUpdate(
+      { _id: catwayId },
+      { catwayState: catwayState },
+      { new: true } // Pour retourner le document mis à jour
+    );
+
+    if (!updatedCatway) {
+      return res.status(404).json({ error: "Catway non trouvé." });
+    }
+
+    // Sauvegarde en base de données
+    await updatedCatway.save();
+
+    // Redirection vers le tableau de bord
+    res.redirect("/dashboard");
+  } catch (error) {
+    console.error(
+      "Erreur lors de la mise à jour de l'état du Catway :",
+      error.message
+    );
+    return res
+      .status(500)
+      .json({ error: "Erreur serveur lors de la mise à jour." });
+  }
+}
+
 module.exports = {
   createUser,
   updateUser,
   deleteUser,
   createCatway,
   getNextCatwayNumber,
+  updateCatwayState,
 };

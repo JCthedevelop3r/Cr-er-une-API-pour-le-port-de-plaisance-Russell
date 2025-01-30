@@ -150,9 +150,10 @@
         <h2 class="h2-form-catway-state">
           Modifier la description de l'état d'un catway
         </h2>
-        <form action="" method="post">
-          <label for="catwayNumber">Numéro du catway :</label>
-          <input type="text" name="catwayNumber" id="catwayNumber" />
+        <form action="/dashboard/update-catway-state" method="post">
+          <input type="hidden" name="_method" value="PATCH" />
+          <label for="catwayId">ID catway :</label>
+          <input type="text" name="catwayId" id="catwayId" required />
           <label for="catwayState">État :</label>
           <textarea
             name="catwayState"
@@ -160,6 +161,7 @@
             rows="4"
             cols="50"
             placeholder="Décrivez l'état du catway..."
+            required
           ></textarea>
           <button type="submit">Valider</button>
         </form>

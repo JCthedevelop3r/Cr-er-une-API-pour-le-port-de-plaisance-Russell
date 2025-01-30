@@ -4,6 +4,7 @@ const logger = require("morgan");
 const cors = require("cors");
 const path = require("path");
 const expressLayouts = require("express-ejs-layouts");
+const methodOverride = require("method-override");
 
 const indexRouter = require("./routes/index");
 const mongodb = require("./mongo");
@@ -27,6 +28,7 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(methodOverride("_method"));
 
 app.use("/", indexRouter);
 

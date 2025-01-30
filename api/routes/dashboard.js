@@ -23,4 +23,7 @@ router.post("/create-catway", dashboardController.createCatway);
 // Route pour obtenir le prochain numéro de catway
 router.get("/next-catway-number", dashboardController.getNextCatwayNumber);
 
+// Route pour modifier la description de l'état d'un catway
+router.post("/update-catway-state", dashboardController.updateCatwayState);
+
 module.exports = router;
