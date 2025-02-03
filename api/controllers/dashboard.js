@@ -246,6 +246,29 @@ async function deleteReservation(req, res) {
   }
 }
 
+async function displayReservationDetails(req, res) {
+  const { reservationId } = req.params;
+
+  try {
+    const reservation = await Reservation.findById(reservationId);
+
+    if (!reservation) {
+      return res.status(404).send("Réservation non trouvée.");
+    }
+
+    res.json({
+      catwayNumber: reservation.catwayNumber,
+      clientName: reservation.clientName,
+      boatName: reservation.boatName,
+      checkIn: reservation.checkIn,
+      checkOut: reservation.checkOut,
+    });
+  } catch (error) {
+    console.error("Erreur récupération réservation :", error);
+    res.status(500).send("Erreur serveur.");
+  }
+}
+
 module.exports = {
   createUser,
   updateUser,
@@ -257,4 +280,5 @@ module.exports = {
   catwayDetails,
   saveReservation,
   deleteReservation,
+  displayReservationDetails,
 };

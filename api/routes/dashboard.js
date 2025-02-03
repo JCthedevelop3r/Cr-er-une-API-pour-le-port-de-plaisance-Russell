@@ -2,11 +2,17 @@ const express = require("express");
 const router = express.Router();
 const dashboardController = require("../controllers/dashboard");
 const Catway = require("../models/catway");
+const Reservation = require("../models/reservation");
 
 router.get("/", async (req, res) => {
   try {
     const catways = await Catway.find(); // Récupère tous les catways
-    res.render("dashboard", { title: "Tableau de bord", catways });
+    const reservations = await Reservation.find();
+    res.render("dashboard", {
+      title: "Tableau de bord",
+      catways,
+      reservations,
+    });
   } catch (error) {
     console.error(
       "Erreur lors de la récupération des catways :",
@@ -45,5 +51,11 @@ router.post("/save-reservation", dashboardController.saveReservation);
 
 // Route pour supprimer une réservation
 router.post("/delete-reservation", dashboardController.deleteReservation);
+
+// Route pour afficher les détails d'une réservation
+router.get(
+  "/reservation-details/:reservationId",
+  dashboardController.displayReservationDetails
+);
 
 module.exports = router;

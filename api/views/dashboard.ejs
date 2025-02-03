@@ -224,26 +224,27 @@
           <button type="submit">Valider</button>
         </form>
       </div>
-      <div class="form-display-details-reservation-container">
+      <div class="form-display-reservation-details-container">
         <h2>Afficher les détails d'une réservation</h2>
-        <form action="" method="post">
-          <!-- Exemple temporaire -->
-          <label for="reservationIdDdr">ID :</label>
-          <select name="reservationId" id="reservationIdDdr">
-            <option value="reservation1">Réservation1</option>
-            <option value="reservation2">Réservation2</option>
-            <option value="reservation3">Réservation3</option>
+        <form>
+          <label for="reservationIdDrd">Réservation :</label>
+          <select name="reservationId" id="reservationIdDrd">
+            <% reservations.forEach(reservation => { %>
+            <option value="<%= reservation._id %>">
+              <%= reservation.clientName %>
+            </option>
+            <% }); %>
           </select>
           <h3>Numéro du catway :</h3>
-          <p>catway1/catway2/catway3</p>
+          <p id="catwayNumberDrd"></p>
           <h3>Nom du client :</h3>
-          <p>PrénomNOM</p>
+          <p id="clientNameDrd"></p>
           <h3>Nom du bateau :</h3>
-          <p>bateau1/bateau2/bateau3</p>
+          <p id="boatNameDrd"></p>
           <h3>Date de début de réservation :</h3>
-          <p>xx-xx-xxxx</p>
+          <p id="checkInDrd"></p>
           <h3>Date de fin de réservation :</h3>
-          <p>xx-xx-xxxx</p>
+          <p id="checkOutDrd"></p>
         </form>
       </div>
     </div>
