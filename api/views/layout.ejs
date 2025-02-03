@@ -30,5 +30,45 @@
     <footer>
       <p>Port de plaisance Russell</p>
     </footer>
+
+    <script>
+      // Fonction pour récupérer dynamiquement le numéro de catway
+      window.onload = async function () {
+        try {
+          const response = await fetch("/dashboard/next-catway-number");
+          const data = await response.json();
+          document.getElementById("catwayNumberCc").value =
+            data.nextCatwayNumber;
+        } catch (error) {
+          console.error(
+            "Erreur lors de la récupération du numéro de catway :",
+            error
+          );
+        }
+      };
+
+      document
+        .getElementById("catwayNumberDcd")
+        .addEventListener("change", function () {
+          const catwayNumber = this.value;
+
+          fetch(`/dashboard/catway-details/${encodeURIComponent(catwayNumber)}`)
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.error) {
+                document.getElementById("catwayTypeDcd").innerText =
+                  "Non trouvé";
+                document.getElementById("catwayStateDcd").innerText = "";
+              } else {
+                document.getElementById("catwayTypeDcd").innerText = data.type;
+                document.getElementById("catwayStateDcd").innerText =
+                  data.catwayState;
+              }
+            })
+            .catch((error) =>
+              console.error("Erreur récupération catway:", error)
+            );
+        });
+    </script>
   </body>
 </html>

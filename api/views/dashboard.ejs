@@ -119,13 +119,13 @@
     </div>
     <div class="catways-form-list-container">
       <div class="form-create-catway-container">
-        <h2 class="h2-form-create-watway">Créer un catway</h2>
+        <h2 class="h2-form-create-catway">Créer un catway</h2>
         <form action="/dashboard/create-catway" method="post">
-          <label for="catwayNumber">Numéro du catway :</label>
+          <label for="catwayNumberCc">Numéro du catway :</label>
           <input
             type="text"
             name="catwayNumber"
-            id="catwayNumber"
+            id="catwayNumberCc"
             value=""
             readonly
           />
@@ -134,10 +134,10 @@
           <input type="radio" name="type" id="short" value="short" required />
           <label for="long">Long</label>
           <input type="radio" name="type" id="long" value="long" required />
-          <label for="catwayState">État :</label>
+          <label for="catwayStateCc">État :</label>
           <textarea
             name="catwayState"
-            id="catwayState"
+            id="catwayStateCc"
             rows="4"
             cols="50"
             placeholder="Décrivez l'état du catway..."
@@ -152,12 +152,12 @@
         </h2>
         <form action="/dashboard/update-catway-state" method="post">
           <input type="hidden" name="_method" value="PATCH" />
-          <label for="catwayId">ID catway :</label>
-          <input type="text" name="catwayId" id="catwayId" required />
-          <label for="catwayState">État :</label>
+          <label for="catwayIdUc">ID catway :</label>
+          <input type="text" name="catwayId" id="catwayIdUc" required />
+          <label for="catwayStateUc">État :</label>
           <textarea
             name="catwayState"
-            id="catwayState"
+            id="catwayStateUc"
             rows="4"
             cols="50"
             placeholder="Décrivez l'état du catway..."
@@ -170,8 +170,8 @@
         <h2 class="h2-delete-catway">Supprimer un catway</h2>
         <form action="/dashboard/delete-catway" method="post">
           <input type="hidden" name="_method" value="DELETE" />
-          <label for="catwayNumber">Numéro du catway :</label>
-          <input type="text" name="catwayNumber" id="catwayNumber" required />
+          <label for="catwayNumberDc">Numéro du catway :</label>
+          <input type="text" name="catwayNumber" id="catwayNumberDc" required />
           <button type="submit">Valider</button>
         </form>
       </div>
@@ -179,22 +179,22 @@
         <h2 class="h2-display-catway-details">
           Afficher les détails d'un catway
         </h2>
-        <form action="" method="post">
-          <label for="catwayNumber">Numéro du catway :</label>
-          <select name="catwayNumber" id="catwayNumber" required>
-            <!-- Exemple temporaire -->
-            <option value="catway1">catway1</option>
-            <option value="catway2">catway2</option>
-            <option value="catway3">catway3</option>
-          </select>
-        </form>
+        <label for="catwayNumberDcd">Numéro du catway :</label>
+        <select name="catwayNumber" id="catwayNumberDcd" required>
+          <% catways.forEach(catway => { %>
+          <option value="<%= catway.catwayNumber %>">
+            <%= catway.catwayNumber %>
+          </option>
+          <% }); %>
+        </select>
+
+        <% if (catways) { %>
         <h3>Type :</h3>
-        <p>Court/Long</p>
+        <p id="catwayTypeDcd"></p>
+
         <h3>État :</h3>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et quae
-          quaerat iure, eligendi maxime saepe!
-        </p>
+        <p id="catwayStateDcd"></p>
+        <% } %>
       </div>
     </div>
     <div class="reservations-form-list-container">
@@ -252,19 +252,3 @@
     </div>
   </div>
 </div>
-
-<script>
-  // Fonction pour récupérer dynamiquement le numéro de catway
-  window.onload = async function () {
-    try {
-      const response = await fetch("/dashboard/next-catway-number");
-      const data = await response.json();
-      document.getElementById("catwayNumber").value = data.nextCatwayNumber;
-    } catch (error) {
-      console.error(
-        "Erreur lors de la récupération du numéro de catway :",
-        error
-      );
-    }
-  };
-</script>

@@ -174,6 +174,26 @@ async function deleteCatway(req, res) {
   }
 }
 
+async function catwayDetails(req, res) {
+  const { catwayNumber } = req.params; // Récupérer le numéro depuis l'URL
+
+  try {
+    const catway = await Catway.findOne({ catwayNumber });
+
+    if (!catway) {
+      return res.json({ error: "Catway non trouvé" });
+    }
+
+    res.json({
+      type: catway.type,
+      catwayState: catway.catwayState,
+    });
+  } catch (error) {
+    console.error("Erreur récupération catway :", error.message);
+    res.status(500).json({ error: "Erreur serveur" });
+  }
+}
+
 module.exports = {
   createUser,
   updateUser,
@@ -182,4 +202,5 @@ module.exports = {
   getNextCatwayNumber,
   updateCatwayState,
   deleteCatway,
+  catwayDetails,
 };
