@@ -168,7 +168,8 @@
       </div>
       <div class="form-delete-catway-container">
         <h2 class="h2-delete-catway">Supprimer un catway</h2>
-        <form action="" method="post">
+        <form action="/dashboard/delete-catway" method="post">
+          <input type="hidden" name="_method" value="DELETE" />
           <label for="catwayNumber">Numéro du catway :</label>
           <input type="text" name="catwayNumber" id="catwayNumber" required />
           <button type="submit">Valider</button>

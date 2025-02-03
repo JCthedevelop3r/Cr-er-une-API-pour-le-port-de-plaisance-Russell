@@ -153,6 +153,27 @@ async function updateCatwayState(req, res) {
   }
 }
 
+async function deleteCatway(req, res) {
+  const { catwayNumber } = req.body;
+
+  try {
+    if (!catwayNumber) {
+      return res.status(400).json({ error: "Numéro du catway requis." });
+    }
+
+    const deletedCatway = await Catway.findOneAndDelete({ catwayNumber });
+
+    if (!deletedCatway) {
+      return res.status(404).json({ error: "Catway non trouvé." });
+    }
+
+    res.redirect("/dashboard"); // Redirection après suppression
+  } catch (error) {
+    console.error("Erreur suppression catway :", error.message);
+    res.status(500).json({ error: "Erreur serveur." });
+  }
+}
+
 module.exports = {
   createUser,
   updateUser,
@@ -160,4 +181,5 @@ module.exports = {
   createCatway,
   getNextCatwayNumber,
   updateCatwayState,
+  deleteCatway,
 };
