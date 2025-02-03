@@ -15,13 +15,13 @@ const Reservation = new Schema(
       type: String,
       required: true,
     },
-    endDate: {
+    checkOut: {
       type: Date,
       required: true,
     },
   },
   {
-    timestamps: true,
+    timestamps: { createdAt: "checkIn", updatedAt: false },
   }
 );
 

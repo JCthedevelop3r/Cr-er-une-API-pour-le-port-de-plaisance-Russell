@@ -28,7 +28,7 @@ router.post("/delete-user", dashboardController.deleteUser);
 // Route pour créer un catway
 router.post("/create-catway", dashboardController.createCatway);
 
-// Route pour obtenir le prochain numéro de catway
+// Route pour obtenir le prochain numéro d'un catway
 router.get("/next-catway-number", dashboardController.getNextCatwayNumber);
 
 // Route pour modifier la description de l'état d'un catway
@@ -37,6 +37,13 @@ router.post("/update-catway-state", dashboardController.updateCatwayState);
 // Route pour supprimer un catway
 router.post("/delete-catway", dashboardController.deleteCatway);
 
-//Route pour afficher les détails d'un catway
+// Route pour afficher les détails d'un catway
 router.get("/catway-details/:catwayNumber", dashboardController.catwayDetails);
+
+// Route pour enregistrer une réservation
+router.post("/save-reservation", dashboardController.saveReservation);
+
+// Route pour supprimer une réservation
+router.post("/delete-reservation", dashboardController.deleteReservation);
+
 module.exports = router;

@@ -1,5 +1,6 @@
 const User = require("../models/user");
 const Catway = require("../models/catway");
+const Reservation = require("../models/reservation");
 const bcrypt = require("bcrypt");
 
 async function createUser(req, res) {
@@ -194,6 +195,57 @@ async function catwayDetails(req, res) {
   }
 }
 
+async function saveReservation(req, res) {
+  try {
+    const { catwayNumber, clientName, boatName, checkIn, checkOut } = req.body;
+
+    // Vérifier que toutes les données sont fournies
+    if (!catwayNumber || !clientName || !boatName || !checkIn || !checkOut) {
+      return res.status(400).send("Tous les champs sont requis.");
+    }
+
+    // Créer une nouvelle réservation
+    const newReservation = new Reservation({
+      catwayNumber,
+      clientName,
+      boatName,
+      checkIn,
+      checkOut,
+    });
+
+    // Sauvegarde dans la base de données
+    await newReservation.save();
+
+    res.redirect("/dashboard");
+  } catch (error) {
+    console.error("Erreur lors de l'enregistrement :", error.message);
+    res.status(500).send("Erreur serveur.");
+  }
+}
+
+async function deleteReservation(req, res) {
+  const { reservationId } = req.body;
+
+  try {
+    if (!reservationId) {
+      return res.status(400).json({ error: "L'ID est requis." });
+    }
+
+    const deletedReservation = await Reservation.findByIdAndDelete(
+      reservationId
+    );
+
+    if (!deletedReservation) {
+      return res.status(404).json({ error: "Réservation non trouvé." });
+    }
+
+    res.redirect("/dashboard"); // Redirection après suppression
+  } catch (error) {
+    console.error("Erreur suppression réservation :", error.message);
+    res.status(500).json({ error: "Erreur serveur." });
+  }
+}
+
 module.exports = {
   createUser,
   updateUser,
@@ -203,4 +255,6 @@ module.exports = {
   updateCatwayState,
   deleteCatway,
   catwayDetails,
+  saveReservation,
+  deleteReservation,
 };
