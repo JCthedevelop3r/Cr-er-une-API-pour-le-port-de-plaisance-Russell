@@ -19,16 +19,13 @@ router.get(
   "/:catwayNumber/reservations",
   reservationsControllers.getReservations
 );
+
 // Route pour afficher les détails d'une réservation en particulier
 router.get(
   "/:catwayNumber/reservations/:idReservation",
-  /*service.getReservation,*/ (req, res) => {
-    res.render("reservation-details", {
-      title: "Réservations details",
-      catways: res.locals.reservations,
-    });
-  }
+  reservationsControllers.getReservationDetails
 );
+
 // Route pour créer une réservation
 router.post("/:id/reservations" /*service.createReservation*/);
 // Route pour supprimer une réservation

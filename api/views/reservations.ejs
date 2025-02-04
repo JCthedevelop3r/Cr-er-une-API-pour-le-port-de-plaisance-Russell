@@ -10,11 +10,13 @@
       </tr>
     </thead>
     <tbody>
-      <% if (reservations.length > 0) { %> <%
-      reservations.forEach(reservation=>{ %>
+      <% if (reservations.length > 0) { %>
+      <%reservations.forEach(reservation=>{%>
       <tr>
         <td class="td-client-name">
-          <a href="/catways/:id/reservations/:reservationId">
+          <a
+            href="/catways/<%= catwayNumber %>/reservations/<%= reservation._id %>"
+          >
             <%= reservation.clientName %>
           </a>
         </td>

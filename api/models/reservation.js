@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const Reservation = new Schema(
   {
     catwayNumber: {
-      type: String,
+      type: Number,
       required: true,
     },
     clientName: {

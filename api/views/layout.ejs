@@ -17,9 +17,11 @@
         <nav>
           <button>Réservations</button>
           <div class="dropdown-content">
-            <a href="/catways/1/reservations">Catway 1</a>
-            <a href="/catways/2/reservations">Catway 2</a>
-            <a href="/catways/3/reservations">Catway 3</a>
+            <% catwaysWithReservations.forEach(catway => { %>
+            <a href="/catways/<%= catway.catwayNumber %>/reservations">
+              Catway <%= catway.catwayNumber %>
+            </a>
+            <% }) %>
           </div>
           <a href="/catways">Catways</a>
           <a href="/dashboard">Tableau de bord</a>
