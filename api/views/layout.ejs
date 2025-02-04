@@ -15,7 +15,12 @@
       </div>
       <div class="right-part-header-container">
         <nav>
-          <a href="/reservations">Réservations</a>
+          <button>Réservations</button>
+          <div class="dropdown-content">
+            <a href="/catways/1/reservations">Catway 1</a>
+            <a href="/catways/2/reservations">Catway 2</a>
+            <a href="/catways/3/reservations">Catway 3</a>
+          </div>
           <a href="/catways">Catways</a>
           <a href="/dashboard">Tableau de bord</a>
         </nav>
@@ -32,78 +37,111 @@
     </footer>
 
     <script>
-      // Fonction pour récupérer dynamiquement le numéro de catway
-      window.onload = async function () {
-        try {
-          const response = await fetch("/dashboard/next-catway-number");
-          const data = await response.json();
-          document.getElementById("catwayNumberCc").value =
-            data.nextCatwayNumber;
-        } catch (error) {
-          console.error(
-            "Erreur lors de la récupération du numéro de catway :",
-            error
-          );
-        }
-      };
-
-      document
-        .getElementById("catwayNumberDcd")
-        .addEventListener("change", function () {
-          const catwayNumber = this.value;
-
-          fetch(`/dashboard/catway-details/${encodeURIComponent(catwayNumber)}`)
-            .then((response) => response.json())
-            .then((data) => {
-              if (data.error) {
-                document.getElementById("catwayTypeDcd").innerText =
-                  "Non trouvé";
-                document.getElementById("catwayStateDcd").innerText = "";
-              } else {
-                document.getElementById("catwayTypeDcd").innerText = data.type;
-                document.getElementById("catwayStateDcd").innerText =
-                  data.catwayState;
-              }
-            })
-            .catch((error) =>
-              console.error("Erreur récupération catway:", error)
-            );
-        });
-
-      // DisplayReservationDetails
-      document
-        .getElementById("reservationIdDrd")
-        .addEventListener("change", async function () {
-          const reservationId = this.value;
-
-          if (reservationId) {
+      // getNextCatwayNumber
+      document.addEventListener("DOMContentLoaded", function () {
+        // Vérifie si l'URL contient "/dashboard"
+        if (window.location.pathname === "/dashboard") {
+          // Fonction pour récupérer dynamiquement le numéro de catway
+          window.onload = async function () {
             try {
-              const response = await fetch(
-                `/dashboard/reservation-details/${reservationId}`
-              );
+              const response = await fetch("/dashboard/next-catway-number");
               const data = await response.json();
-
-              document.getElementById("catwayNumberDrd").textContent =
-                data.catwayNumber;
-              document.getElementById("clientNameDrd").textContent =
-                data.clientName;
-              document.getElementById("boatNameDrd").textContent =
-                data.boatName;
-              document.getElementById("checkInDrd").textContent = new Date(
-                data.checkIn
-              ).toLocaleDateString("fr-FR");
-              document.getElementById("checkOutDrd").textContent = new Date(
-                data.checkOut
-              ).toLocaleDateString("fr-FR");
-              data.checkOut;
+              document.getElementById("catwayNumberCc").value =
+                data.nextCatwayNumber;
             } catch (error) {
               console.error(
-                "Erreur lors de la récupération des détails de la réservation",
+                "Erreur lors de la récupération du numéro de catway :",
                 error
               );
             }
+          };
+        }
+      });
+
+      // displayCatwayDetails
+      document.addEventListener("DOMContentLoaded", function () {
+        // Vérifie si l'URL contient "/dashboard"
+        if (window.location.pathname === "/dashboard") {
+          const catwayNumberDropdown =
+            document.getElementById("catwayNumberDcd");
+
+          if (catwayNumberDropdown) {
+            catwayNumberDropdown.addEventListener("change", function () {
+              const catwayNumber = this.value;
+
+              fetch(
+                `/dashboard/catway-details/${encodeURIComponent(catwayNumber)}`
+              )
+                .then((response) => response.json())
+                .then((data) => {
+                  if (data.error) {
+                    document.getElementById("catwayTypeDcd").innerText =
+                      "Non trouvé";
+                    document.getElementById("catwayStateDcd").innerText = "";
+                  } else {
+                    document.getElementById("catwayTypeDcd").innerText =
+                      data.type;
+                    document.getElementById("catwayStateDcd").innerText =
+                      data.catwayState;
+                  }
+                })
+                .catch((error) =>
+                  console.error("Erreur récupération catway:", error)
+                );
+            });
+          } else {
+            console.warn(
+              "L'élément #catwayNumberDcd n'existe pas sur cette page."
+            );
           }
-        });
+        }
+      });
+
+      // DisplayReservationDetails
+      document.addEventListener("DOMContentLoaded", function () {
+        // Vérifie si l'URL contient "/dashboard"
+        if (window.location.pathname === "/dashboard") {
+          const reservationDropdown =
+            document.getElementById("reservationIdDrd");
+
+          if (reservationDropdown) {
+            reservationDropdown.addEventListener("change", async function () {
+              const reservationId = this.value;
+
+              if (reservationId) {
+                try {
+                  const response = await fetch(
+                    `/dashboard/reservation-details/${reservationId}`
+                  );
+                  const data = await response.json();
+
+                  document.getElementById("catwayNumberDrd").textContent =
+                    data.catwayNumber;
+                  document.getElementById("clientNameDrd").textContent =
+                    data.clientName;
+                  document.getElementById("boatNameDrd").textContent =
+                    data.boatName;
+                  document.getElementById("checkInDrd").textContent = new Date(
+                    data.checkIn
+                  ).toLocaleDateString("fr-FR");
+                  document.getElementById("checkOutDrd").textContent = new Date(
+                    data.checkOut
+                  ).toLocaleDateString("fr-FR");
+                } catch (error) {
+                  console.error(
+                    "Erreur lors de la récupération des détails de la réservation",
+                    error
+                  );
+                }
+              }
+            });
+          } else {
+            console.warn(
+              "L'élément #reservationIdDrd n'existe pas sur cette page."
+            );
+          }
+        }
+      });
     </script>
   </body>
 </html>

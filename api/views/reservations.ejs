@@ -1,25 +1,35 @@
 <div class="reservations-container">
   <h1>Réservations</h1>
+  <h2>Catway N°<%= catwayNumber %></h2>
   <table>
     <thead>
       <tr>
         <th class="th-client-name">Nom du client</th>
-        <th class="th-check-in-container">Date de début de réservation</th>
+        <th class="th-check-in">Date de début de réservation</th>
+        <th class="th-check-out">Date de fin de réservation</th>
       </tr>
     </thead>
     <tbody>
+      <% if (reservations.length > 0) { %> <%
+      reservations.forEach(reservation=>{ %>
       <tr>
-        <td class="td-client-name">PrénomNOM</td>
-        <td class="td-check-in-container">Date de début de réservation</td>
+        <td class="td-client-name">
+          <a href="/catways/:id/reservations/:reservationId">
+            <%= reservation.clientName %>
+          </a>
+        </td>
+        <td class="td-check-in">
+          <%= reservation.checkIn.toLocaleDateString() %>
+        </td>
+        <td class="td-check-out">
+          <%= reservation.checkOut.toLocaleDateString() %>
+        </td>
       </tr>
+      <% }); %> <% } else { %>
       <tr>
-        <td class="td-client-name">PrénomNOM</td>
-        <td class="td-check-in-container">Date de début de réservation</td>
+        <td colspan="3">Aucune réservation pour ce catway.</td>
       </tr>
-      <tr>
-        <td class="td-client-name">PrénomNOM</td>
-        <td class="td-check-in-container">Date de début de réservation</td>
-      </tr>
+      <% } %>
     </tbody>
   </table>
 </div>
