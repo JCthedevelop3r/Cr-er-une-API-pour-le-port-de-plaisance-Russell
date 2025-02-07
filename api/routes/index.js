@@ -5,8 +5,9 @@ const catwayRoute = require("./catways");
 const dashboardRoute = require("./dashboard");
 const docRoute = require("./doc");
 const Catway = require("../models/catway");
+const authRoute = require("./authenticate");
 
-// Route de la page d'accueil / de connexion
+// Routes de la page d'accueil / de connexion
 router.get("/", async function (req, res, next) {
   const catways = await Catway.find();
 
@@ -22,5 +23,6 @@ router.use("/catways", catwayRoute);
 
 router.use("/dashboard", dashboardRoute);
 router.use("/documentation", docRoute);
+router.use("/authenticate", authRoute);
 
 module.exports = router;
