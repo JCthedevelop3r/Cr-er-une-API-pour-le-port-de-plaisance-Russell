@@ -6,7 +6,7 @@ const path = require("path");
 const expressLayouts = require("express-ejs-layouts");
 const methodOverride = require("method-override");
 const getCatwaysWithReservations =
-  require("./controllers/reservations").getCatwaysWithReservations;
+  require("./middlewares/catways").getCatwaysWithReservations;
 
 const indexRouter = require("./routes/index");
 const mongodb = require("./mongo");

@@ -44,7 +44,7 @@ router.post("/update-catway-state", dashboardController.updateCatwayState);
 router.post("/delete-catway", dashboardController.deleteCatway);
 
 // Route pour afficher les détails d'un catway
-router.get("/catway-details/:catwayNumber", dashboardController.catwayDetails);
+router.get("/catway-details/:catwayNumber", dashboardController.getCatwayDetails);
 
 // Route pour enregistrer une réservation
 router.post("/save-reservation", dashboardController.saveReservation);

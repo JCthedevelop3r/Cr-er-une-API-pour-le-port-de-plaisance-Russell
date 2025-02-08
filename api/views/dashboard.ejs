@@ -3,8 +3,6 @@
     <h1><%= title%></h1>
     <a
       href="/documentation"
-      target="_blank"
-      rel="noopener noreferrer"
       class="link-api-documentation"
     >
       <button>Voir la documentation</button>
@@ -229,6 +227,7 @@
         <form>
           <label for="reservationIdDrd">Réservation :</label>
           <select name="reservationId" id="reservationIdDrd">
+            <option value="">Sélectionnez une réservation</option>
             <% reservations.forEach(reservation => { %>
             <option value="<%= reservation._id %>">
               <%= reservation.clientName %>
