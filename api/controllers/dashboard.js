@@ -45,6 +45,8 @@ async function updateUser(req, res) {
 }
 
 async function deleteUser(req, res) {
+  console.log("🗑️ Requête reçue pour suppression :", req.body);
+
   try {
     const { userId } = req.body;
 

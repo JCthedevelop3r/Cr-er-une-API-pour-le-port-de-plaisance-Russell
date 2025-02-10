@@ -3,9 +3,9 @@ const router = express.Router();
 
 const catwayRoute = require("./catways");
 const dashboardRoute = require("./dashboard");
+const authRoute = require("./auth.js");
 const docRoute = require("./doc");
 const Catway = require("../models/catway");
-const authRoute = require("./authenticate");
 
 // Routes de la page d'accueil / de connexion
 router.get("/", async function (req, res, next) {
@@ -24,5 +24,6 @@ router.use("/catways", catwayRoute);
 router.use("/dashboard", dashboardRoute);
 router.use("/documentation", docRoute);
 router.use("/authenticate", authRoute);
+
 
 module.exports = router;

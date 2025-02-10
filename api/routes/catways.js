@@ -3,11 +3,13 @@ const router = express.Router();
 
 const catwaysControllers = require("../controllers/catways");
 const reservationsControllers = require("../controllers/reservations");
+const private = require("../middlewares/private");
+
 
 // Routes pour les catways
 
 // Route pour récupérer la liste des catways
-router.get("/", catwaysControllers.getCatwaysList);
+router.get("/", private.authenticateToken, catwaysControllers.getCatwaysList);
 
 // Route pour récupérer les détails d'un catway en particulier
 router.get("/:id", catwaysControllers.getCatwayDetails);
@@ -16,7 +18,8 @@ router.get("/:id", catwaysControllers.getCatwayDetails);
 
 // Route pour récupérer la liste des réservations d'un catway
 router.get(
-  "/:catwayNumber/reservations",
+  "/:catwayNumber/reservations", 
+  private.authenticateToken,
   reservationsControllers.getReservations
 );
 
@@ -24,14 +27,6 @@ router.get(
 router.get(
   "/:catwayNumber/reservations/:idReservation",
   reservationsControllers.getReservationDetails
-);
-
-// Route pour créer une réservation
-router.post("/:id/reservations" /*service.createReservation*/);
-// Route pour supprimer une réservation
-router.delete(
-  "/:id/reservations/:idReservation"
-  /*service.deleteReservation*/
 );
 
 module.exports = router;

@@ -1,4 +1,3 @@
-const Catway = require("../models/catway");
 const catwayService = require("../services/catways");
 
 
