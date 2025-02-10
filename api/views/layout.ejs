@@ -3,19 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= title %></title>
+    <title>API Port de Plaisance Russell</title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
     <header>
       <div class="left-part-header-container">
         <a href="/dashboard">
-          <p>Port de plaisance Russell</p>
+          <p>Port de Plaisance Russell</p>
         </a>
       </div>
       <div class="right-part-header-container">
         <nav>
-          <a href="/reservations">Réservations</a>
+          <button>Réservations</button>
+          <div class="dropdown-content">
+            <% catwaysWithReservations.forEach(catway => { %>
+            <a href="/catways/<%= catway.catwayNumber %>/reservations">
+              Catway <%= catway.catwayNumber %>
+            </a>
+            <% }) %>
+          </div>
           <a href="/catways">Catways</a>
           <a href="/dashboard">Tableau de bord</a>
         </nav>
@@ -28,7 +35,10 @@
     </main>
 
     <footer>
-      <p>Port de plaisance Russell</p>
+      <p>Port de Plaisance Russell</p>
     </footer>
+
+    <script src="/javascripts/dashboard.js" defer></script>
+
   </body>
 </html>

@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const Reservation = new Schema(
   {
     catwayNumber: {
-      type: String,
+      type: Number,
       required: true,
     },
     clientName: {
@@ -15,13 +15,13 @@ const Reservation = new Schema(
       type: String,
       required: true,
     },
-    endDate: {
+    checkOut: {
       type: Date,
       required: true,
     },
   },
   {
-    timestamps: true,
+    timestamps: { createdAt: "checkIn", updatedAt: false },
   }
 );
 
