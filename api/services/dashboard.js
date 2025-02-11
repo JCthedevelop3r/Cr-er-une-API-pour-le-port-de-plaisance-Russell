@@ -1,5 +1,6 @@
 const Catway = require("../models/catway");
 const Reservation = require("../models/reservation");
+const mongoose = require("mongoose");
 
 async function getNextCatwayNumber() {
     const lastCatway = await Catway.findOne().sort({ catwayNumber: -1 });
@@ -24,9 +25,9 @@ async function createCatway(type, catwayState) {
   }
 
   async function updateCatwayState(catwayId, catwayState) {
-    if (!catwayId || !catwayState) {
-      throw new Error("ID Catway et État sont requis.");
-    }
+    if (!mongoose.isValidObjectId(catwayId)) {
+        throw new Error("L'ID utilisateur fourni est invalide.");
+      }
   
     const updatedCatway = await Catway.findOneAndUpdate(
       { _id: catwayId },
@@ -42,10 +43,6 @@ async function createCatway(type, catwayState) {
   }
 
   async function deleteCatway(catwayNumber) {
-    if (!catwayNumber) {
-      throw new Error("Numéro du catway requis.");
-    }
-  
     const deletedCatway = await Catway.findOneAndDelete({ catwayNumber });
   
     if (!deletedCatway) {

@@ -97,6 +97,7 @@
               method="post"
               class="form-update-user"
             >
+              <input type="hidden" name="_method" value="PATCH" />
               <label for="userId">Entrez l'identifiant :</label>
               <input type="text" name="userId" id="userId" required />
               <label for="name">Nom :</label>
@@ -118,6 +119,7 @@
               method="post"
               class="form-delete-user"
             >
+              <input type="hidden" name="_method" value="DELETE" />
               <label for="userId">Entrez l'identifiant :</label>
               <input type="text" name="userId" id="userId" required />
               <label for="name">Nom :</label>
@@ -133,20 +135,24 @@
     <div class="catways-form-list-container">
       <div class="form-create-catway-container">
         <h2 class="h2-form-create-catway">Créer un catway</h2>
+        <% if (errorCreateCatway) { %>
+          <div class="error-message" style="color: red">
+            <%= errorCreateCatway %>
+          </div>
+        <% } %>
         <form action="/dashboard/create-catway" method="post">
           <label for="catwayNumberCc">Numéro du catway :</label>
           <input
             type="text"
             name="catwayNumber"
             id="catwayNumberCc"
-            value=""
             readonly
           />
           <p>Type :</p>
           <label for="short">Court</label>
-          <input type="radio" name="type" id="short" value="short" required />
+          <input type="radio" name="type" id="short" value="short" required/>
           <label for="long">Long</label>
-          <input type="radio" name="type" id="long" value="long" required />
+          <input type="radio" name="type" id="long" value="long" required/>
           <label for="catwayStateCc">État :</label>
           <textarea
             name="catwayState"
@@ -163,6 +169,11 @@
         <h2 class="h2-form-catway-state">
           Modifier la description de l'état d'un catway
         </h2>
+        <% if (errorUpdateCatway) { %>
+          <div class="error-message" style="color: red">
+            <%= errorUpdateCatway %>
+          </div>
+        <% } %>
         <form action="/dashboard/update-catway-state" method="post">
           <input type="hidden" name="_method" value="PATCH" />
           <label for="catwayIdUc">ID catway :</label>
@@ -181,6 +192,11 @@
       </div>
       <div class="form-delete-catway-container">
         <h2 class="h2-delete-catway">Supprimer un catway</h2>
+        <% if (errorDeleteCatway) { %>
+          <div class="error-message" style="color: red">
+            <%= errorDeleteCatway %>
+          </div>
+        <% } %>
         <form action="/dashboard/delete-catway" method="post">
           <input type="hidden" name="_method" value="DELETE" />
           <label for="catwayNumberDc">Numéro du catway :</label>
@@ -192,6 +208,7 @@
         <h2 class="h2-display-catway-details">
           Afficher les détails d'un catway
         </h2>
+          <div class="error-message-dcd" style="color: red"></div>
         <label for="catwayNumberDcd">Numéro du catway :</label>
         <select name="catwayNumber" id="catwayNumberDcd" required>
           <option disabled selected>Sélectionnez un numéro</option>
@@ -200,15 +217,16 @@
             <%= catway.catwayNumber %>
           </option>
           <% }); %>
+          <option value="38">
+            38
+          </option>
         </select>
 
-        <% if (catways) { %>
         <h3>Type :</h3>
         <p id="catwayTypeDcd"></p>
 
         <h3>État :</h3>
         <p id="catwayStateDcd"></p>
-        <% } %>
       </div>
     </div>
     <div class="reservations-form-list-container">
@@ -242,7 +260,7 @@
         <form>
           <label for="reservationIdDrd">Réservation :</label>
           <select name="reservationId" id="reservationIdDrd">
-            <option value="">Sélectionnez une réservation</option>
+            <option value="" disabled selected>Sélectionnez une réservation</option>
             <% reservations.forEach(reservation => { %>
             <option value="<%= reservation._id %>">
               <%= reservation.clientName %>

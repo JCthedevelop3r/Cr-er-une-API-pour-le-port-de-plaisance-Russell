@@ -19,15 +19,13 @@ router.get("/", async (req, res) => {
       errorCreateUser: req.session.errorCreateUser || null,
       errorUpdateUser: req.session.errorUpdateUser || null,
       errorDeleteUser: req.session.errorDeleteUser || null,
+      errorCreateCatway: req.session.errorCreateCatway || null,
+      errorUpdateCatway: req.session.errorUpdateCatway || null,
+      errorDeleteCatway: req.session.errorDeleteCatway || null,
     });
-
-    // ✅ Supprimer l'erreur après l'affichage
-    req.session.errorCreateUser = null;
-    req.session.errorUpdateUser = null;
-    req.session.errorDeleteUser = null;
   } catch (error) {
     console.error(
-      "Erreur lors de la récupération des catways :",
+      "Erreur serveur :",
       error.message
     );
     res.status(500).send("Erreur serveur");

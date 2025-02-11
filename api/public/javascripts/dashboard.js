@@ -28,8 +28,9 @@ function displayCatwayDetails() {
             try {
                 const response = await fetch(`/dashboard/catway-details/${encodeURIComponent(catwayNumber)}`);
                 const data = await response.json();
-                document.getElementById("catwayTypeDcd").innerText = data.error ? "Non trouvé" : data.type;
-                document.getElementById("catwayStateDcd").innerText = data.error ? "" : data.catwayState;
+                document.getElementById("catwayTypeDcd").innerText = data.error ? "Non trouvé." : data.type;
+                document.getElementById("catwayStateDcd").innerText = data.error ? "Non trouvé." : data.catwayState;
+                document.querySelector(".error-message-dcd").innerText = data.error ? "Catway non trouvé." : data.catwayState;
             } catch (error) {
                 console.error("Erreur récupération catway:", error);
             }
