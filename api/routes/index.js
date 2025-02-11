@@ -5,16 +5,17 @@ const catwayRoute = require("./catways");
 const dashboardRoute = require("./dashboard");
 const authRoute = require("./auth.js");
 const docRoute = require("./doc");
-const Catway = require("../models/catway");
+const catwaysService = require("../services/catways.js")
 
 // Routes de la page d'accueil / de connexion
-router.get("/", async function (req, res, next) {
-  const catways = await Catway.find();
+router.get("/", function (req, res) {
+  const catways = catwaysService.getAllCatways();
 
   res.render("home", {
     title: "Accueil",
     message: "Bienvenue sur l'API du port de plaisance Russell !",
     catways,
+    error: null,
   });
 });
 

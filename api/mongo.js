@@ -8,7 +8,6 @@ const clientOptions = {
 
 exports.initClientDbConnection = async () => {
   try {
-    console.log("MongoDB URI:", process.env.URL_MONGO);
     await mongoose.connect(process.env.URL_MONGO, clientOptions);
     console.log("connected");
   } catch (error) {

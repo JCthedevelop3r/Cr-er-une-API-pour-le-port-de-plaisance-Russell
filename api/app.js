@@ -1,5 +1,6 @@
 require("dotenv").config();  // Charger les variables d'environnement dès le début
 const express = require("express");
+const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cors = require("cors");
@@ -34,6 +35,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(methodOverride("_method"));
 app.use(getCatwaysWithReservations);
+app.use(session({
+  secret: "pl84nm95sz3258",
+  resave: false,
+  saveUninitialized: true,
+  cookie: { maxAge: 10000 }
+}));
 
 app.use("/", indexRouter);
 

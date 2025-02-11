@@ -11,11 +11,20 @@ router.get("/", async (req, res) => {
   try {
     const catways = await catwayService.getAllCatways();
     const reservations = await Reservation.find();
+
     res.render("dashboard", {
       title: "Tableau de bord",
       catways,
       reservations,
+      errorCreateUser: req.session.errorCreateUser || null,
+      errorUpdateUser: req.session.errorUpdateUser || null,
+      errorDeleteUser: req.session.errorDeleteUser || null,
     });
+
+    // ✅ Supprimer l'erreur après l'affichage
+    req.session.errorCreateUser = null;
+    req.session.errorUpdateUser = null;
+    req.session.errorDeleteUser = null;
   } catch (error) {
     console.error(
       "Erreur lors de la récupération des catways :",

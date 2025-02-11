@@ -31,6 +31,11 @@
   <div class="right-content-container">
     <section class="login">
       <h2 class="h-login">Connectez-vous</h2>
+      <% if (error) { %>
+        <div class="error-message" style="color: red;">
+          <%= error %>
+        </div>
+      <% } %>
       <div class="login-form-container">
         <form action="/authenticate" method="post" class="login-form" id="login-form">
           <label for="email">E-mail :</label>

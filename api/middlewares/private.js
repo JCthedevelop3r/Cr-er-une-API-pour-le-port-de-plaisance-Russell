@@ -1,7 +1,6 @@
 const jwt = require("jsonwebtoken");
 
 function authenticateToken(req, res, next) {
-    console.log("private.js s'active !")
     const token = req.cookies.token; // Récupère le token du cookie
 
     if (!token) {
