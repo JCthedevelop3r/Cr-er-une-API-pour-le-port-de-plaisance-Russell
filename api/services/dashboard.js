@@ -26,7 +26,7 @@ async function createCatway(type, catwayState) {
 
   async function updateCatwayState(catwayId, catwayState) {
     if (!mongoose.isValidObjectId(catwayId)) {
-        throw new Error("L'ID utilisateur fourni est invalide.");
+        throw new Error("L'ID du catway fourni est invalide.");
       }
   
     const updatedCatway = await Catway.findOneAndUpdate(
@@ -66,6 +66,11 @@ async function createCatway(type, catwayState) {
   }
 
   async function createReservation({ catwayNumber, clientName, boatName, checkIn, checkOut }) {
+    const numCatway = Number(catwayNumber);
+    if (isNaN(numCatway)) {
+      throw new Error("Numéro de catway invalide.");
+    }
+    
     if (!catwayNumber || !clientName || !boatName || !checkIn || !checkOut) {
       throw new Error("Tous les champs sont requis.");
     }
@@ -85,6 +90,10 @@ async function createCatway(type, catwayState) {
   async function deleteReservation(reservationId) {
     if (!reservationId) {
       throw new Error("L'ID est requis.");
+    }
+
+    if (!mongoose.isValidObjectId(reservationId)) {
+      throw new Error("L'ID de la réservation fourni est invalide.");
     }
   
     const deletedReservation = await Reservation.findByIdAndDelete(reservationId);

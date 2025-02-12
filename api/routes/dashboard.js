@@ -22,6 +22,9 @@ router.get("/", async (req, res) => {
       errorCreateCatway: req.session.errorCreateCatway || null,
       errorUpdateCatway: req.session.errorUpdateCatway || null,
       errorDeleteCatway: req.session.errorDeleteCatway || null,
+      errorDeleteReservation: req.session.errorDeleteReservation || null,
+      errorSaveReservation: req.session.errorSaveReservation || null,
+
     });
   } catch (error) {
     console.error(

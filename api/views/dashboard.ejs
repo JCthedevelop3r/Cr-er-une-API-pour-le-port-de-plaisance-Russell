@@ -208,7 +208,7 @@
         <h2 class="h2-display-catway-details">
           Afficher les détails d'un catway
         </h2>
-          <div class="error-message-dcd" style="color: red"></div>
+        <div class="error-message-dcd" style="color: red"></div>
         <label for="catwayNumberDcd">Numéro du catway :</label>
         <select name="catwayNumber" id="catwayNumberDcd" required>
           <option disabled selected>Sélectionnez un numéro</option>
@@ -217,9 +217,6 @@
             <%= catway.catwayNumber %>
           </option>
           <% }); %>
-          <option value="38">
-            38
-          </option>
         </select>
 
         <h3>Type :</h3>
@@ -232,31 +229,42 @@
     <div class="reservations-form-list-container">
       <div class="form-save-reservation-container">
         <h2 class="h2-save-reservation">Enregistrer une réservation</h2>
+        <% if (errorSaveReservation) { %>
+          <div class="error-message" style="color: red">
+            <%= errorSaveReservation %>
+          </div>
+        <% } %>
         <form action="/dashboard/save-reservation" method="post">
           <label for="catwayNumberSr">Numéro du catway :</label>
-          <input type="text" name="catwayNumber" id="catwayNumberSr" />
+          <input type="text" name="catwayNumber" id="catwayNumberSr" required />
           <label for="clientNameSr">Nom du client :</label>
-          <input type="text" name="clientName" id="clientNameSr" />
+          <input type="text" name="clientName" id="clientNameSr" required />
           <label for="boatNameSr">Nom du bateau amarré :</label>
-          <input type="text" name="boatName" id="boatNameSr" />
+          <input type="text" name="boatName" id="boatNameSr" required />
           <label for="checkInSr">Date de début de réservation :</label>
-          <input type="date" name="checkIn" id="checkInSr" />
+          <input type="date" name="checkIn" id="checkInSr" required />
           <label for="checkOutSr">Date de fin de réservation :</label>
-          <input type="date" name="checkOut" id="checkOutSr" />
+          <input type="date" name="checkOut" id="checkOutSr" required />
           <button type="submit">Valider</button>
         </form>
       </div>
       <div class="form-delete-reservation-container">
         <h2>Supprimer une réservation</h2>
+        <% if (errorDeleteReservation) { %>
+          <div class="error-message" style="color: red">
+            <%= errorDeleteReservation %>
+          </div>
+        <% } %>
         <form action="/dashboard/delete-reservation" method="post">
           <input type="hidden" name="_method" value="DELETE" />
           <label for="reservationIdDr">ID :</label>
-          <input type="text" name="reservationId" id="reservationIdDr" />
+          <input type="text" name="reservationId" id="reservationIdDr" required />
           <button type="submit">Valider</button>
         </form>
       </div>
       <div class="form-display-reservation-details-container">
         <h2>Afficher les détails d'une réservation</h2>
+        <div class="error-message-drd" style="color: red"></div>
         <form>
           <label for="reservationIdDrd">Réservation :</label>
           <select name="reservationId" id="reservationIdDrd">

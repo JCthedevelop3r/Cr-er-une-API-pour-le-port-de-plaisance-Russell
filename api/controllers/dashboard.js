@@ -160,6 +160,11 @@ async function deleteCatway(req, res) {
   try {
     const { catwayNumber } = req.body;
 
+    const numCatway = Number(catwayNumber);
+    if (isNaN(numCatway)) {
+      throw new Error("Numéro de catway invalide.");
+    }
+
     if (!catwayNumber) {
       throw new Error("Numéro du catway requis.")
     }
@@ -197,7 +202,16 @@ async function saveReservation(req, res) {
     await dashboardService.createReservation(req.body);
     res.redirect("/dashboard");
   } catch (error) {
-    res.status(400).send(error.message);
+    req.session.errorSaveReservation = error.message;
+
+    req.session.save(() => {
+      setTimeout(() => {
+        req.session.errorSaveReservation = null;
+        req.session.save();
+      }, 10000);
+    });  
+
+    res.redirect("/dashboard");
   }
 }
 
@@ -206,7 +220,16 @@ async function deleteReservation(req, res) {
     await dashboardService.deleteReservation(req.body.reservationId);
     res.redirect("/dashboard");
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    req.session.errorDeleteReservation = error.message;
+
+    req.session.save(() => {
+      setTimeout(() => {
+        req.session.errorDeleteReservation = null;
+        req.session.save();
+      }, 10000);
+    });  
+
+    res.redirect("/dashboard");
   }
 }
 
