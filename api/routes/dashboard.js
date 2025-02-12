@@ -23,11 +23,15 @@ router.get("/", async (req, res) => {
       errorDeleteUser: req.session.errorDeleteUser || null,
       successDeleteUser: req.session.successDeleteUser || null,
       errorCreateCatway: req.session.errorCreateCatway || null,
+      successCreateCatway: req.session.successCreateCatway || null,
       errorUpdateCatway: req.session.errorUpdateCatway || null,
+      successUpdateCatway: req.session.successUpdateCatway || null,
       errorDeleteCatway: req.session.errorDeleteCatway || null,
-      errorDeleteReservation: req.session.errorDeleteReservation || null,
+      successDeleteCatway: req.session.successDeleteCatway || null,
       errorSaveReservation: req.session.errorSaveReservation || null,
-
+      successSaveReservation: req.session.successSaveReservation || null,
+      errorDeleteReservation: req.session.errorDeleteReservation || null,
+      successDeleteReservation: req.session.successDeleteReservation || null,
     });
   } catch (error) {
     console.error(

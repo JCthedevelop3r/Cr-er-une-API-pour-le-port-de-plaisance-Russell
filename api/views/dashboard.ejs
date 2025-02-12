@@ -150,6 +150,11 @@
     <div class="catways-form-list-container">
       <div class="form-create-catway-container">
         <h2 class="h2-form-create-catway">Créer un catway</h2>
+        <% if (successCreateCatway) { %>
+          <div class="success-message" style="color: green">
+            <%= successCreateCatway %>
+          </div>
+        <% } %>
         <% if (errorCreateCatway) { %>
           <div class="error-message" style="color: red">
             <%= errorCreateCatway %>
@@ -184,6 +189,11 @@
         <h2 class="h2-form-catway-state">
           Modifier la description de l'état d'un catway
         </h2>
+        <% if (successUpdateCatway) { %>
+          <div class="success-message" style="color: green">
+            <%= successUpdateCatway %>
+          </div>
+        <% } %>
         <% if (errorUpdateCatway) { %>
           <div class="error-message" style="color: red">
             <%= errorUpdateCatway %>
@@ -207,6 +217,11 @@
       </div>
       <div class="form-delete-catway-container">
         <h2 class="h2-delete-catway">Supprimer un catway</h2>
+        <% if (successDeleteCatway) { %>
+          <div class="success-message" style="color: green">
+            <%= successDeleteCatway %>
+          </div>
+        <% } %>
         <% if (errorDeleteCatway) { %>
           <div class="error-message" style="color: red">
             <%= errorDeleteCatway %>
@@ -244,6 +259,11 @@
     <div class="reservations-form-list-container">
       <div class="form-save-reservation-container">
         <h2 class="h2-save-reservation">Enregistrer une réservation</h2>
+        <% if (successSaveReservation) { %>
+          <div class="success-message" style="color: green">
+            <%= successSaveReservation %>
+          </div>
+        <% } %>
         <% if (errorSaveReservation) { %>
           <div class="error-message" style="color: red">
             <%= errorSaveReservation %>
@@ -265,6 +285,11 @@
       </div>
       <div class="form-delete-reservation-container">
         <h2>Supprimer une réservation</h2>
+        <% if (successDeleteReservation) { %>
+          <div class="success-message" style="color: green">
+            <%= successDeleteReservation %>
+          </div>
+        <% } %>
         <% if (errorDeleteReservation) { %>
           <div class="error-message" style="color: red">
             <%= errorDeleteReservation %>

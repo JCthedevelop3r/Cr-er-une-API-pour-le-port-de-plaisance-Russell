@@ -129,6 +129,15 @@ async function createCatway(req, res) {
     // Appeler le service pour créer le catway
     await dashboardService.createCatway(type, catwayState);
 
+    req.session.successCreateCatway = "Catway créé avec succès !";
+
+    req.session.save(() => {
+      setTimeout(() => {
+        req.session.successDeleteUser = null;
+        req.session.save();
+      }, 10000);
+    });
+
     res.redirect("/dashboard");
   } catch (error) {
     console.error("Erreur lors de la création du catway :", error);
@@ -166,6 +175,15 @@ async function updateCatwayState(req, res) {
 
     await dashboardService.updateCatwayState(catwayId, catwayState);
 
+    req.session.successUpdateCatway = "L'opération est un succès !";
+
+    req.session.save(() => {
+      setTimeout(() => {
+        req.session.successUpdateUser = null;
+        req.session.save();
+      }, 10000);
+    });
+
     res.redirect("/dashboard");
   } catch (error) {
     req.session.errorUpdateCatway = error.message;
@@ -195,6 +213,15 @@ async function deleteCatway(req, res) {
     }
 
     await dashboardService.deleteCatway(catwayNumber);
+
+    req.session.successDeleteCatway = "Catway supprimé avec succès !";
+
+    req.session.save(() => {
+      setTimeout(() => {
+        req.session.successDeleteCatway = null;
+        req.session.save();
+      }, 10000);
+    });
 
     res.redirect("/dashboard");
   } catch (error) {
@@ -226,6 +253,15 @@ async function saveReservation(req, res) {
   try {
     await dashboardService.createReservation(req.body);
     res.redirect("/dashboard");
+
+    req.session.successSaveReservation = "Réservation enregistrée avec succès !";
+
+    req.session.save(() => {
+      setTimeout(() => {
+        req.session.successSaveReservation = null;
+        req.session.save();
+      }, 10000);
+    });
   } catch (error) {
     req.session.errorSaveReservation = error.message;
 
@@ -243,6 +279,16 @@ async function saveReservation(req, res) {
 async function deleteReservation(req, res) {
   try {
     await dashboardService.deleteReservation(req.body.reservationId);
+
+    req.session.successDeleteReservation = "Réservation supprimée avec succès !";
+
+    req.session.save(() => {
+      setTimeout(() => {
+        req.session.successDeleteReservation = null;
+        req.session.save();
+      }, 10000);
+    });
+
     res.redirect("/dashboard");
   } catch (error) {
     req.session.errorDeleteReservation = error.message;
