@@ -80,11 +80,11 @@ async function updateUser(req, res) {
 
 async function deleteUser(req, res) {
   try {
-    const { userId, name, email } = req.body;
+    const { userId } = req.body;
 
     // Vérifier que tous les champs sont remplis
-    if (!userId || !name || !email) {
-      throw new Error("Tous les champs doivent être remplis")
+    if (!userId) {
+      throw new Error("L'ID est requis.")
     }
 
     // Appeler le service pour supprimer l'utilisateur
