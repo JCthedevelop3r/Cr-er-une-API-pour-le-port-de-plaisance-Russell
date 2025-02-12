@@ -66,6 +66,11 @@
         <div class="users-form-list-container">
           <div class="form-create-user-container">
             <h2 class="h2-form-create-user">Créer un utilisateur</h2>
+            <% if (successCreateUser) { %>
+              <div class="success-message" style="color: green">
+                <%= successCreateUser %>
+              </div>
+            <% } %>
             <% if (errorCreateUser) { %>
               <div class="error-message" style="color: red">
                 <%= errorCreateUser %>
@@ -87,6 +92,11 @@
           </div>
           <div class="form-update-user-container">
             <h2 class="h2-form-update-user">Modifier un utilisateur</h2>
+            <% if (successUpdateUser) { %>
+              <div class="success-message" style="color: green">
+                <%= successUpdateUser %>
+              </div>
+            <% } %>
             <% if (errorUpdateUser) { %>
               <div class="error-message" style="color: red">
                 <%= errorUpdateUser %>
@@ -109,6 +119,11 @@
           </div>
           <div class="form-delete-user-container">
             <h2 class="h2-form-delete-user">Supprimer un utilisateur</h2>
+            <% if (successDeleteUser) { %>
+              <div class="success-message" style="color: green">
+                <%= successDeleteUser %>
+              </div>
+            <% } %>
             <% if (errorDeleteUser) { %>
               <div class="error-message" style="color: red">
                 <%= errorDeleteUser %>

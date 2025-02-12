@@ -1,7 +1,5 @@
-const Reservation = require("../models/reservation");
 const userService = require("../services/user");
 const dashboardService = require("../services/dashboard");
-const catwaysService = require("../services/catways");
 
 async function createUser(req, res) {
   try {
@@ -14,6 +12,15 @@ async function createUser(req, res) {
 
     // Appeler le service pour créer l'utilisateur
     await userService.createUser(name, email, password);
+
+    req.session.successCreateUser = "Utilisateur créé avec succès !";
+
+    req.session.save(() => {
+      setTimeout(() => {
+        req.session.successCreateUser = null;
+        req.session.save();
+      }, 10000);
+    });
 
     // Redirection après création réussie
     res.redirect("/dashboard");
@@ -45,6 +52,15 @@ async function updateUser(req, res) {
     // Appeler le service pour mettre à jour l'utilisateur
     await userService.updateUser(userId, name, email);
 
+    req.session.successUpdateUser = "Utilisateur modifié avec succès !";
+
+    req.session.save(() => {
+      setTimeout(() => {
+        req.session.successUpdateUser = null;
+        req.session.save();
+      }, 10000);
+    });
+
     res.redirect("/dashboard");
   } catch (error) {
     console.error("Erreur lors de la mise à jour de l'utilisateur :", error.message);
@@ -73,6 +89,15 @@ async function deleteUser(req, res) {
 
     // Appeler le service pour supprimer l'utilisateur
     await userService.deleteUser(userId);
+
+    req.session.successDeleteUser = "Utilisateur supprimé avec succès !";
+
+    req.session.save(() => {
+      setTimeout(() => {
+        req.session.successDeleteUser = null;
+        req.session.save();
+      }, 10000);
+    });
 
     res.redirect("/dashboard");
   } catch (error) {
