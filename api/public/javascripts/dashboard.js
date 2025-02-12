@@ -28,8 +28,9 @@ function displayCatwayDetails() {
             try {
                 const response = await fetch(`/dashboard/catway-details/${encodeURIComponent(catwayNumber)}`);
                 const data = await response.json();
-                document.getElementById("catwayTypeDcd").innerText = data.error ? "Non trouvé" : data.type;
-                document.getElementById("catwayStateDcd").innerText = data.error ? "" : data.catwayState;
+                document.getElementById("catwayTypeDcd").innerText = data.error ? "Non trouvé." : data.type;
+                document.getElementById("catwayStateDcd").innerText = data.error ? "Non trouvé." : data.catwayState;
+                document.querySelector(".error-message-dcd").innerText = data.error ? "Catway non trouvé." : null;
             } catch (error) {
                 console.error("Erreur récupération catway:", error);
             }
@@ -52,11 +53,13 @@ function displayReservationDetails() {
                     const response = await fetch(`/dashboard/reservation-details/${reservationId}`);
                     const data = await response.json();
 
-                    document.getElementById("catwayNumberDrd").textContent = data.catwayNumber;
-                    document.getElementById("clientNameDrd").textContent = data.clientName;
-                    document.getElementById("boatNameDrd").textContent = data.boatName;
-                    document.getElementById("checkInDrd").textContent = new Date(data.checkIn).toLocaleDateString("fr-FR");
-                    document.getElementById("checkOutDrd").textContent = new Date(data.checkOut).toLocaleDateString("fr-FR");
+                    document.getElementById("catwayNumberDrd").textContent = data.error ? "Non trouvé." : data.catwayNumber;
+                    document.getElementById("clientNameDrd").textContent = data.error ? "Non trouvé." : data.clientName;
+                    document.getElementById("boatNameDrd").textContent = data.error ? "Non trouvé." : data.boatName;
+                    document.getElementById("checkInDrd").textContent = data.error ? "Non trouvé." : new Date(data.checkIn).toLocaleDateString("fr-FR");
+                    document.getElementById("checkOutDrd").textContent = data.error ? "Non trouvé." : new Date(data.checkOut).toLocaleDateString("fr-FR");
+                    document.querySelector(".error-message-drd").textContent = data.error ? "Réservation non trouvé." : null;
+
                 } catch (error) {
                     console.error("Erreur lors de la récupération des détails de la réservation", error);
                 }

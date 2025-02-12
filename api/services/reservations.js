@@ -23,7 +23,6 @@ async function findReservationByIdAndCatway(idReservation, catwayNumber) {
     try {
       return await Reservation.findOne({ _id: idReservation, catwayNumber });
     } catch (error) {
-      console.error("Erreur lors de la récupération de la réservation :", error);
       throw new Error("Erreur serveur lors de la récupération de la réservation.");
     }
   }

@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/user");
+const mongoose = require("mongoose");
 
 async function createUser(name, email, password) {
   // Vérifier que l'utilisateur n'existe pas déjà
@@ -25,6 +26,11 @@ async function createUser(name, email, password) {
 }
 
 async function updateUser(userId, name, email) {
+  // Vérifier que l'ID est bien un ObjectId valide
+  if (!mongoose.isValidObjectId(userId)) {
+    throw new Error("L'ID utilisateur fourni est invalide.");
+  }
+
   // Vérifier que l'utilisateur existe
   const user = await User.findById(userId);
   if (!user) {
@@ -42,6 +48,11 @@ async function updateUser(userId, name, email) {
 }
 
 async function deleteUser(userId) {
+  // Vérifier que l'ID est bien un ObjectId valide
+  if (!mongoose.isValidObjectId(userId)) {
+    throw new Error("L'ID utilisateur fourni est invalide.");
+  }
+
   // Vérifier que l'utilisateur existe
   const user = await User.findByIdAndDelete(userId);
 
