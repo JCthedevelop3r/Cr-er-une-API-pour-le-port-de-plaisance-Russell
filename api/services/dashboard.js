@@ -70,13 +70,18 @@ async function createCatway(type, catwayState) {
     if (isNaN(numCatway)) {
       throw new Error("Numéro de catway invalide.");
     }
+
+    const catwayExists = await Catway.findOne({ catwayNumber: numCatway });
+    if (!catwayExists) {
+        throw new Error("Ce numéro de catway n'existe pas.");
+    }
     
     if (!catwayNumber || !clientName || !boatName || !checkIn || !checkOut) {
       throw new Error("Tous les champs sont requis.");
     }
   
     const newReservation = new Reservation({
-      catwayNumber,
+      catwayNumber : numCatway,
       clientName,
       boatName,
       checkIn,

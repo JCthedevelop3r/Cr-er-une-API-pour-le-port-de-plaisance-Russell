@@ -1,0 +1,25 @@
+<div class="all-reservations-container">
+    <h1>Toutes les réservations</h1>
+    <table>
+        <thead>
+            <tr>
+                <th class="th-catway-number">Numéro du catway</th>
+                <th class="th-client-name">Nom du client</th>
+                <th class="th-boat-name">Nom du bateau</th>
+                <th class="th-check-in">Date de début de réservation</th>
+                <th class="th-check-out">Date de fin de réservation</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% reservations.forEach(reservation => { %>
+                <tr>
+                    <td class="td-catway-number"><%= reservation.catwayNumber %></td>
+                    <td class="td-client-name"><%= reservation.clientName %></td>
+                    <td class="td-boat-name"><%= reservation.boatName %></td>
+                    <td class="td-check-in"><%= new Date(reservation.checkIn).toLocaleDateString("fr-FR") %></td>
+                    <td class="td-check-out"><%= new Date(reservation.checkOut).toLocaleDateString("fr-FR") %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</div>

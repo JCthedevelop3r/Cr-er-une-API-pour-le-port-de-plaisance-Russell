@@ -27,7 +27,17 @@ async function findReservationByIdAndCatway(idReservation, catwayNumber) {
     }
   }
 
+async function getAllReservations() {
+  try {
+    return await Reservation.find();
+  } catch (error) {
+    throw new Error("Erreur lors de la récupération des réservations." + error.message);
+  }
+}
+  
+
 module.exports = {
   getReservationsByCatway,
   findReservationByIdAndCatway,
+  getAllReservations,
 };

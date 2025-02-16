@@ -26,6 +26,7 @@ async function createUser(req, res) {
     res.redirect("/dashboard");
   } catch (error) {
     console.error("Erreur lors de la création de l'utilisateur :", error.message);
+    console.log(error.message);
     
     req.session.errorCreateUser = error.message;
 
@@ -245,7 +246,7 @@ async function getCatwayDetails(req, res) {
     const catwayDetails = await dashboardService.getCatwayDetails(catwayNumber);
     res.json(catwayDetails);
   } catch (error) {
-    res.status(404).json({ error: "Catway non trouvé" });
+    res.status(404).json({ error: "Catway non trouvé." });
   }
 }
 
