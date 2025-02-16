@@ -26,6 +26,7 @@ async function createUser(req, res) {
     res.redirect("/dashboard");
   } catch (error) {
     console.error("Erreur lors de la création de l'utilisateur :", error.message);
+    console.log(error.message);
     
     req.session.errorCreateUser = error.message;
 
