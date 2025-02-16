@@ -1,7 +1,5 @@
-const Reservation = require("../models/reservation");
 const Catway = require("../models/catway");
 const reservationService = require("../services/reservations");
-
 
 async function getReservations(req, res) {
   try {
@@ -35,7 +33,18 @@ async function getReservationDetails(req, res) {
   }
 }
 
+async function getAllReservations(req, res) {
+  try {
+    const reservations = await reservationService.getAllReservations();
+    res.render("allReservations", { reservations });
+  } catch (error) {
+    console.error("Erreur lors de la récupération des réservations :", error);
+    res.status(500).send("Erreur serveur lors de la récupération des réservations.");
+  }
+}
+
 module.exports = {
   getReservations,
   getReservationDetails,
+  getAllReservations,
 };

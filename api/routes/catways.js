@@ -11,6 +11,9 @@ const private = require("../middlewares/private");
 // Route pour récupérer la liste des catways
 router.get("/", private.authenticateToken, catwaysControllers.getCatwaysList);
 
+// Route pour récupérer la liste de toutes les réservations
+router.get("/allReservations", private.authenticateToken, reservationsControllers.getAllReservations);
+
 // Route pour récupérer les détails d'un catway en particulier
 router.get("/:id", catwaysControllers.getCatwayDetails);
 
@@ -28,5 +31,6 @@ router.get(
   "/:catwayNumber/reservations/:idReservation",
   reservationsControllers.getReservationDetails
 );
+
 
 module.exports = router;
