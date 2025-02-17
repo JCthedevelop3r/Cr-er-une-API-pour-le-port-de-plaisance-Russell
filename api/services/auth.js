@@ -2,9 +2,15 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 
-async function authenticate(req, res) {
-  const { email, password } = req.body;
-
+/**
+ * Vérifie les identifiants d'un utilisateur et retourne un token JWT.
+ *
+ * @param {string} email - L'email de l'utilisateur.
+ * @param {string} password - Le mot de passe de l'utilisateur.
+ * @returns {string} Le token JWT généré.
+ * @throws {Error} Si les identifiants sont incorrects.
+ */
+async function authenticate(email, password) {
   if (!email || !password) {
     throw new Error("Vous devez remplir tous les champs.");
   }
@@ -20,16 +26,7 @@ async function authenticate(req, res) {
   }
 
   // Génère un token JWT
-  const token = jwt.sign({ userId: user._id }, process.env.SECRET_KEY, { expiresIn: "24h" });
-
-  // Stocke le token dans un cookie HTTP-only
-  res.cookie("token", token, {
-    httpOnly: true,
-    secure: false, // Mettre `true` en production avec HTTPS
-    sameSite: "Strict"
-  });
-
-  res.redirect("/dashboard"); // Redirection serveur
+  return jwt.sign({ userId: user._id }, process.env.SECRET_KEY, { expiresIn: "24h" });
 }
 
 module.exports = { authenticate };
