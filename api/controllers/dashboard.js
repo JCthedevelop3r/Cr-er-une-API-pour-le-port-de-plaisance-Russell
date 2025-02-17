@@ -1,16 +1,22 @@
 const userService = require("../services/user");
 const dashboardService = require("../services/dashboard");
 
+/**
+ * Crée un nouvel utilisateur.
+ *
+ * @param {Object} req - La requête HTTP contenant les données de l'utilisateur.
+ * @param {Object} res - La réponse HTTP.
+ * @returns {void} Redirige vers le dashboard après la création.
+ * @throws {Error} En cas d'erreur lors de la création de l'utilisateur.
+ */
 async function createUser(req, res) {
   try {
     const { name, email, password } = req.body;
 
-    // Vérifier que tous les champs sont remplis
     if (!name || !email || !password) {
       throw new Error("Tous les champs doivent être remplis.");
     }
 
-    // Appeler le service pour créer l'utilisateur
     await userService.createUser(name, email, password);
 
     req.session.successCreateUser = "Utilisateur créé avec succès !";
@@ -22,12 +28,10 @@ async function createUser(req, res) {
       }, 10000);
     });
 
-    // Redirection après création réussie
     res.redirect("/dashboard");
   } catch (error) {
     console.error("Erreur lors de la création de l'utilisateur :", error.message);
-    console.log(error.message);
-    
+
     req.session.errorCreateUser = error.message;
 
     req.session.save(() => {
@@ -41,16 +45,22 @@ async function createUser(req, res) {
   }
 }
 
+/**
+ * Met à jour les informations d'un utilisateur.
+ *
+ * @param {Object} req - La requête HTTP contenant les nouvelles informations de l'utilisateur.
+ * @param {Object} res - La réponse HTTP.
+ * @returns {void} Redirige vers le dashboard après la mise à jour.
+ * @throws {Error} En cas d'erreur lors de la mise à jour de l'utilisateur.
+ */
 async function updateUser(req, res) {
   try {
     const { userId, name, email } = req.body;
 
-    // Vérifier que tous les champs nécessaires sont présents
     if (!userId || !name || !email) {
       throw new Error("Tous les champs doivent être remplis.");
     }
 
-    // Appeler le service pour mettre à jour l'utilisateur
     await userService.updateUser(userId, name, email);
 
     req.session.successUpdateUser = "Utilisateur modifié avec succès !";
@@ -65,7 +75,7 @@ async function updateUser(req, res) {
     res.redirect("/dashboard");
   } catch (error) {
     console.error("Erreur lors de la mise à jour de l'utilisateur :", error.message);
-    
+
     req.session.errorUpdateUser = error.message;
 
     req.session.save(() => {
@@ -79,16 +89,22 @@ async function updateUser(req, res) {
   }
 }
 
+/**
+ * Supprime un utilisateur.
+ *
+ * @param {Object} req - La requête HTTP contenant l'ID de l'utilisateur à supprimer.
+ * @param {Object} res - La réponse HTTP.
+ * @returns {void} Redirige vers le dashboard après la suppression.
+ * @throws {Error} En cas d'erreur lors de la suppression de l'utilisateur.
+ */
 async function deleteUser(req, res) {
   try {
     const { userId } = req.body;
 
-    // Vérifier que tous les champs sont remplis
     if (!userId) {
-      throw new Error("L'ID est requis.")
+      throw new Error("L'ID est requis.");
     }
 
-    // Appeler le service pour supprimer l'utilisateur
     await userService.deleteUser(userId);
 
     req.session.successDeleteUser = "Utilisateur supprimé avec succès !";
@@ -117,17 +133,22 @@ async function deleteUser(req, res) {
   }
 }
 
-
+/**
+ * Crée un nouveau catway.
+ *
+ * @param {Object} req - La requête HTTP contenant les informations du catway.
+ * @param {Object} res - La réponse HTTP.
+ * @returns {void} Redirige vers le dashboard après la création.
+ * @throws {Error} En cas d'erreur lors de la création du catway.
+ */
 async function createCatway(req, res) {
   try {
     const { type, catwayState } = req.body;
 
-    // Vérifier que les champs nécessaires sont fournis
     if (!type || !catwayState) {
-      throw new Error("Le type du catway et la description de l'état du catway sont requis.")
+      throw new Error("Le type du catway et la description de l'état du catway sont requis.");
     }
 
-    // Appeler le service pour créer le catway
     await dashboardService.createCatway(type, catwayState);
 
     req.session.successCreateCatway = "Catway créé avec succès !";
@@ -150,22 +171,38 @@ async function createCatway(req, res) {
         req.session.errorCreateCatway = null;
         req.session.save();
       }, 10000);
-    });  
+    });
 
     res.redirect("/dashboard");
   }
 }
 
+/**
+ * Récupère le prochain numéro de catway disponible.
+ *
+ * @param {Object} req - La requête HTTP.
+ * @param {Object} res - La réponse HTTP.
+ * @returns {Object} Le numéro de catway suivant.
+ * @throws {Error} En cas d'erreur serveur.
+ */
 async function getNextCatwayNumber(req, res) {
   try {
     const nextCatwayNumber = await dashboardService.getNextCatwayNumber();
-    res.json({ nextCatwayNumber }); // Retourne le numéro dans une réponse JSON
+    res.json({ nextCatwayNumber });
   } catch (error) {
-    console.error("Erreur serveur : ", error)
+    console.error("Erreur serveur : ", error);
     res.status(500).send("Erreur serveur");
   }
 }
 
+/**
+ * Met à jour l'état d'un catway.
+ *
+ * @param {Object} req - La requête HTTP contenant les informations du catway.
+ * @param {Object} res - La réponse HTTP.
+ * @returns {void} Redirige vers le dashboard après la mise à jour.
+ * @throws {Error} En cas d'erreur lors de la mise à jour du catway.
+ */
 async function updateCatwayState(req, res) {
   try {
     const { catwayId, catwayState } = req.body;
@@ -194,12 +231,20 @@ async function updateCatwayState(req, res) {
         req.session.errorUpdateCatway = null;
         req.session.save();
       }, 10000);
-    });  
+    });
 
     res.redirect("/dashboard");
   }
 }
 
+/**
+ * Supprime un catway.
+ *
+ * @param {Object} req - La requête HTTP contenant le numéro du catway à supprimer.
+ * @param {Object} res - La réponse HTTP.
+ * @returns {void} Redirige vers le dashboard après la suppression.
+ * @throws {Error} En cas d'erreur lors de la suppression du catway.
+ */
 async function deleteCatway(req, res) {
   try {
     const { catwayNumber } = req.body;
@@ -210,7 +255,7 @@ async function deleteCatway(req, res) {
     }
 
     if (!catwayNumber) {
-      throw new Error("Numéro du catway requis.")
+      throw new Error("Numéro du catway requis.");
     }
 
     await dashboardService.deleteCatway(catwayNumber);
@@ -233,12 +278,20 @@ async function deleteCatway(req, res) {
         req.session.errorDeleteCatway = null;
         req.session.save();
       }, 10000);
-    });  
+    });
 
     res.redirect("/dashboard");
   }
 }
 
+/**
+ * Récupère les détails d'un catway spécifique.
+ *
+ * @param {Object} req - La requête HTTP contenant le numéro du catway.
+ * @param {Object} res - La réponse HTTP.
+ * @returns {Object} Détails du catway.
+ * @throws {Error} Si le catway n'est pas trouvé.
+ */
 async function getCatwayDetails(req, res) {
   try {
     const { catwayNumber } = req.params;
@@ -250,6 +303,14 @@ async function getCatwayDetails(req, res) {
   }
 }
 
+/**
+ * Sauvegarde une nouvelle réservation.
+ *
+ * @param {Object} req - La requête HTTP contenant les informations de la réservation.
+ * @param {Object} res - La réponse HTTP.
+ * @returns {void} Redirige vers le dashboard après la sauvegarde.
+ * @throws {Error} En cas d'erreur lors de la sauvegarde de la réservation.
+ */
 async function saveReservation(req, res) {
   try {
     await dashboardService.createReservation(req.body);
@@ -271,12 +332,20 @@ async function saveReservation(req, res) {
         req.session.errorSaveReservation = null;
         req.session.save();
       }, 10000);
-    });  
+    });
 
     res.redirect("/dashboard");
   }
 }
 
+/**
+ * Supprime une réservation existante.
+ *
+ * @param {Object} req - La requête HTTP contenant l'ID de la réservation à supprimer.
+ * @param {Object} res - La réponse HTTP.
+ * @returns {void} Redirige vers le dashboard après la suppression.
+ * @throws {Error} En cas d'erreur lors de la suppression de la réservation.
+ */
 async function deleteReservation(req, res) {
   try {
     await dashboardService.deleteReservation(req.body.reservationId);
@@ -299,12 +368,20 @@ async function deleteReservation(req, res) {
         req.session.errorDeleteReservation = null;
         req.session.save();
       }, 10000);
-    });  
+    });
 
     res.redirect("/dashboard");
   }
 }
 
+/**
+ * Affiche les détails d'une réservation spécifique.
+ *
+ * @param {Object} req - La requête HTTP contenant l'ID de la réservation.
+ * @param {Object} res - La réponse HTTP.
+ * @returns {Object} Les détails de la réservation.
+ * @throws {Error} Si la réservation n'est pas trouvée.
+ */
 async function displayReservationDetails(req, res) {
   try {
     const reservationDetails = await dashboardService.getReservationDetails(req.params.reservationId);

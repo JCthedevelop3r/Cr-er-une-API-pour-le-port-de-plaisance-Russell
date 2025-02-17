@@ -1,6 +1,13 @@
 const catwayService = require("../services/catways");
 
-
+/**
+ * Récupère la liste de tous les catways et les rend sur la page catways.
+ *
+ * @param {Object} req - L'objet de la requête HTTP.
+ * @param {Object} res - L'objet de la réponse HTTP.
+ * @returns {Promise<void>} - La réponse est rendue avec les données des catways.
+ * @throws {Error} En cas d'erreur lors de la récupération des catways.
+ */
 async function getCatwaysList(req, res) {
   try {
     const catways = await catwayService.getAllCatways();
@@ -10,6 +17,14 @@ async function getCatwaysList(req, res) {
   }
 }
 
+/**
+ * Récupère les détails d'un catway spécifique et les rend sur la page catway-details.
+ *
+ * @param {Object} req - L'objet de la requête HTTP.
+ * @param {Object} res - L'objet de la réponse HTTP.
+ * @returns {Promise<void>} - La réponse est rendue avec les données du catway.
+ * @throws {Error} En cas d'erreur lors de la récupération du catway.
+ */
 async function getCatwayDetails(req, res) {
   try {
     const catwayId = req.params.id;
