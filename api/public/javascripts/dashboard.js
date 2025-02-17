@@ -36,7 +36,7 @@ function displayCatwayDetails() {
             }
         });
     } else {
-        console.warn("L'élément #catwayNumberDcd n'existe pas sur cette page.");
+        console.warn("L'élément #catwayNumberDcd n'existe pas sur cette page."); // Avertissement si l'élément n'existe pas
     }
 }
 
@@ -66,6 +66,6 @@ function displayReservationDetails() {
             }
         });
     } else {
-        console.warn("L'élément #reservationIdDrd n'existe pas sur cette page.");
+        console.warn("L'élément #reservationIdDrd n'existe pas sur cette page."); // Avertissement si l'élément n'existe pas
     }
 }

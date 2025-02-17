@@ -6,7 +6,7 @@ const Reservation = require("../models/reservation");
 const catwayService = require("../services/catways")
 const private = require("../middlewares/private");
 
-
+// Route pour le tableau de bord
 router.get("/", async (req, res) => {
   try {
     const catways = await catwayService.getAllCatways();

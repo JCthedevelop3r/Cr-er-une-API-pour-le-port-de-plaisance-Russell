@@ -7,7 +7,7 @@ const authRoute = require("./auth.js");
 const docRoute = require("./doc");
 const catwaysService = require("../services/catways.js")
 
-// Routes de la page d'accueil / de connexion
+// Route de la page d'accueil (ou page de connexion)
 router.get("/", function (req, res) {
   const catways = catwaysService.getAllCatways();
 
@@ -19,11 +19,17 @@ router.get("/", function (req, res) {
   });
 });
 
+// Route pour les catways
 // Les routes pour les réservations se trouvent aussi dans "/catways"
 router.use("/catways", catwayRoute);
 
+// Route pour le tableau de bord
 router.use("/dashboard", dashboardRoute);
+
+// Route pour la documentation
 router.use("/documentation", docRoute);
+
+// Route pour l'authentification
 router.use("/authenticate", authRoute);
 
 
