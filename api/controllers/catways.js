@@ -1,3 +1,5 @@
+const catwayService = require("../services/catways");
+
 /**
  * Récupère la liste de tous les catways et les rend sur la page catways.
  *
