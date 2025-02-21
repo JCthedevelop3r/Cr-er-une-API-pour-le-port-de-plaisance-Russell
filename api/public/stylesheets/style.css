@@ -66,3 +66,9 @@ a:hover {
   display: flex;
   justify-content: space-between;
 }
+
+.picture {
+  border: 1px solid #00B7FF;
+  border-radius: 5%;
+  width: 75%;
+}
