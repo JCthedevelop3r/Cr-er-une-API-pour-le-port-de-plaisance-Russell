@@ -10,13 +10,13 @@
     <header>
       <div class="left-part-header-container">
         <a href="/dashboard">
-          <p>Port de Plaisance Russell</p>
+          <p class="logo">Port de Plaisance Russell</p>
         </a>
       </div>
       <div class="right-part-header-container">
         <nav>
-          <button>Réservations</button>
-          <div class="dropdown-content">
+          <button id="reservations-button">Réservations</button>
+          <div class="dropdown-content" id="dropdown-content">
             <a href="/catways/allReservations">Voir toutes les réservations</a>
             <% catwaysWithReservations.forEach(catway => { %>
             <a href="/catways/<%= catway.catwayNumber %>/reservations">
@@ -26,6 +26,7 @@
           </div>
           <a href="/catways">Catways</a>
           <a href="/dashboard">Tableau de bord</a>
+          <a href="/">Accueil</a>
         </nav>
       </div>
     </header>
@@ -40,6 +41,7 @@
     </footer>
 
     <script src="/javascripts/dashboard.js" defer></script>
-
+    <script src="/javascripts/header.style.js"></script>
+    <script src="/javascripts/dashboard.style.js"></script>
   </body>
 </html>
