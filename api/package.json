@@ -5,7 +5,7 @@
   "scripts": {
     "start": "nodemon ./bin/www",
     "dev": "env-cmd -f ./env/.env.dev nodemon ./bin/www",
-    "prod": "nodemon ./bin/www",
+    "prod": "chmod +x ./node_modules/.bin/nodemon && nodemon ./bin/www",
     "test": "mocha"
   },
   "dependencies": {
