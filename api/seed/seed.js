@@ -1,6 +1,8 @@
 /**
  * Script de peuplement de la base de données.
  * 
+ * UTILISEZ LA COMMANDE "node seed/seed.js" POUR PEUPLER LA BASE DE DONNÉES.
+ * 
  * Ce fichier se charge de la connexion à la base de données, de la suppression des anciennes données et de l'insertion de nouvelles données
  * à partir de fichiers JSON pour les collections Catway, Reservation et User.
  */
