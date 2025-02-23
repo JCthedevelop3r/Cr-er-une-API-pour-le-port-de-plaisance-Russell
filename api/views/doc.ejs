@@ -1,1 +1,535 @@
-<h1>Bienvenue sur la documentation de l'API du Port de Plaisance Russell !</h1>
+<div class="doc-container">
+    <h1>Bienvenue sur la documentation de l'API du Port de Plaisance Russell !</h1>
+    <div class="overview">
+        <div class="introduction-container">
+            <h2 class="h2-overview">Vue d'ensemble</h2>
+            <p class="introduction">
+                L'API REST du Port de Plaisance Russell permet de gérer les opérations courantes
+                d'un port de plaisance, comme la gestion des catways disponibles, des
+                réservations et des utilisateurs.
+            </p>
+        </div>
+        <div class="table-main-functionality-container">
+            <h3>Les fonctionnalités clés de l'API :</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th class="th-functionalitys">Fonctionnalités</th>
+                        <th class="th-description">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="td-functionality">Gestion des utilisateurs</td>
+                        <td class="td-description">Créer, modifier et supprimer des comptes utilisateurs.</td>
+                    </tr>
+                    <tr>
+                        <td class="td-functionality">Gestion des réservations</td>
+                        <td class="td-description">Consulter, enregistrer et supprimer des réservations.</td>
+                    </tr>
+                    <tr>
+                        <td class="td-functionality">Gestion des catways</td>
+                        <td class="td-description">Créer, consulter et supprimer des réservations.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="security-container">
+            <h3>Sécurité :</h3>
+            <p class="security-text">
+                Certains endpoints nécessitent une authentification via un token JWT (JSONWebToken) qui
+                est transmit au moment de la connexion d'un utilisateur.
+            </p>
+        </div>
+        <div class="quick-example-container">
+            <h3>Exemple rapide :</h3>
+            <div class="quick-example">
+                <h4>Accéder à la page /dashboard :</h4>
+                <p class="quick-example-intro">
+                    Pour voir le tableau de bord de l'application, il suffit de cliquer sur "Tableau de bord" 
+                    dans l'en-tête de l'application.
+                </p>
+                <h5>Requête correspondante :</h5>
+                <p class="quick-example-req-description">
+                    La page /dashboard correspond à une requête GET dans l'API, qui va rendre un template côté 
+                    serveur avec toutes les informations nécessaires pour afficher le tableau de bord.
+                </p>
+                <h5>Exemple de requête :</h5>
+                <p class="req-get-dashboard">GET http://localhost:3000/dashboard</p>
+                <h5>Réponse :</h5>
+                <p class="res-get-dashboard">
+                    La réponse de cette requête est simplement un rendu de template :
+                </p>
+                <img src="/images/dashboard.png" alt="Tableau de bord de l'API PPR" class="picture">
+            </div>
+        </div>
+    </div>
+    <div class="tutorials">
+        <h2>Tutoriels</h2>
+        <p class="tutorials-intro">
+            Cette partie de la documentation a pour but de vous montrer comment utiliser 
+            chaque fonctionnalité de l'API.
+        </p>
+        <div class="auth-tutorial">
+            <h3>Se connecter :</h3>
+            <p class="auth-tutorial-intro">
+                Pour vous connecter, un formulaire est mis à votre disposition avec une 
+                adresse mail et un mot de passe à saisir. En cliquant sur "se connecter", 
+                vous soumettez le formulaire, ce qui correspond à une requête POST dans 
+                l'API. Si votre compte utilisateur est bien reconnu, un token vous 
+                est transmis, ce qui vous renverra sur la page /dashboard et vous donnera 
+                accès aux endpoints protégées.
+            </p>
+            <h4>Requête correspondante :</h4>
+            <p class="auth-req-description">
+                À la soumission du formulaire (avec les champs correctement rempli), 
+                l'API envoie une requête POST vers la route /authenticate avec vos
+                données de connexion.
+            </p>
+            <h4>Exemple de requête :</h4>
+            <p class="auth-req-example">POST http://localhost:3000/authenticate</p>
+            <h4>Réponse :</h4>
+            <p class="auth-res-description">
+                La réponse de cette requête correspond au stockage du token JWT dans les 
+                cookies, puis à la redirection vers la page /dashboard.
+            </p>
+            <img src="/images/token_in_cookies.png" alt="Onglet « cookies » de la section « storage » de l'outil de développement" class="picture">
+        </div>
+        <div class="dashboard-tutorials-container">
+            <div class="dashboard-user-tutorials-container">
+                <div class="create-user-tutorial">
+                    <h3>Créer un utilisateur :</h3>
+                    <p class="create-user-intro">
+                        Pour créer un utilisateur, un formulaire est mis à votre disposition 
+                        avec un nom, un email et un mot de passe à saisir. En cliquant sur 
+                        "valider", vous soumettez le formulaire, ce qui correspond à une 
+                        requête POST dans l'API. Un nouvel utilisateur est ensuite créé dans 
+                        la base de données.
+                    </p>
+                    <h4>Requête correspondante :</h4>
+                    <p class="create-user-req-description">
+                        À la soumission du formulaire (avec les champs correctement rempli), 
+                        l'API envoie une requête POST vers la route /dashboard/create-user avec 
+                        les données que vous avez saisi.
+                    </p>
+                    <h4>Exemple de requête :</h4>
+                    <p class="create-user-req-example">POST http://localhost:3000/dashboard/create-user</p>
+                    <h4>Réponse :</h4>
+                    <img src="/images/create_user_success.png" alt="Formulaire « Créer un utilisateur » avec un message de succès" class="picture">
+                </div>
+                <div class="update-user-tutorial">
+                    <h3>Modifier un utilisateur :</h3>
+                    <p class="update-user-intro">
+                        Pour modifier un utilisateur, un formulaire est mis à votre disposition 
+                        avec un identifiant, un nom et un email à saisir. En cliquant sur 
+                        "valider", vous soumettez le formulaire, ce qui correspond à une 
+                        requête PUT ou PATCH dans l'API. L'utilisateur ciblé (grâce à l'identifiant) 
+                        a ses données mises à jour en base de données.
+                    </p>
+                    <h4>Requête correspondante :</h4>
+                    <p class="update-user-req-description">
+                        À la soumission du formulaire (avec les champs correctement rempli), 
+                        l'API envoie une requête PUT ou PATCH vers la route /dashboard/update-user avec 
+                        les données que vous avez saisi.
+                    </p>
+                    <h4>Exemple de requête :</h4>
+                    <p class="update-user-req-example">
+                        PUT http://localhost:3000/dashboard/update-user ou 
+                        PATCH http://localhost:3000/dashboard/update-user
+                    </p>
+                    <h4>Réponse :</h4>
+                    <img src="/images/update_user_success.png" alt="Formulaire « Modifier un utilisateur » avec un message de succès." class="picture">
+                </div>
+                <div class="delete-user-tutorial">
+                    <h3>Supprimer un utilisateur :</h3>
+                    <p class="delete-user-intro">
+                        Pour supprimer un utilisateur, un formulaire est mis à votre disposition 
+                        avec un identifiant à saisir. En cliquant sur "valider", vous soumettez le formulaire, 
+                        ce qui correspond à une requête DELETE dans l'API. L'utilisateur ciblé (grâce à 
+                        l'identifiant) est supprimé de la base de données.
+                    </p>
+                    <h4>Requête correspondante :</h4>
+                    <p class="delete-user-req-description">
+                        À la soumission du formulaire (avec le champ correctement rempli), l'API envoie une 
+                        requête DELETE vers la route /dashboard/delete-user avec l'identifiant que vous avez 
+                        saisi.
+                    </p>
+                    <h4>Exemple de requête :</h4>
+                    <p class="delete-user-req-example">DELETE http://localhost:3000/dashboard/delete-user</p>
+                    <h4>Réponse :</h4>
+                    <img src="/images/delete_user_success.png" alt="Formulaire « Supprimer un utilisateur » avec un message de succès." class="picture">
+                </div>
+            </div>
+            <div class="dashboard-catway-tutorials-container">
+                <div class="create-catway-tutorial">
+                    <h3>Créer un catway :</h3>
+                    <p class="create-catway-intro">
+                        Pour créer un catway, un formulaire est mis à votre disposition avec le numéro du 
+                        prochain catway pré-rempli, le type à choisir (court ou long) et l'état du catway 
+                        à décrire. En cliquant sur "valider", vous soumettez le formulaire, ce qui correspond 
+                        à une requête POST dans l'API. Un nouveau catway est ensuite créer dans la base de 
+                        données.
+                    </p>
+                    <h4>Requête correspondante :</h4>
+                    <p class="create-catway-req-description">
+                        À la soumission du formulaire (avec les champs correctement remplis), l'API envoie une 
+                        requête POST vers la route /dashboard/create-catway avec les données que vous avez 
+                        saisi.
+                    </p>
+                    <h4>Exemple de requête :</h4>
+                    <p class="create-catway-req-example">POST http://localhost:3000/dashboard/create-catway</p>
+                    <h4>Réponse :</h4>
+                    <img src="/images/create_catway_success.png" alt="Formulaire « Créer un catway » avec un message de succès." class="picture">
+                </div>
+                <div class="update-catway-state-tutorial">
+                    <h3>Modifier la description de l'état d'un catway :</h3>
+                    <p class="update-catway-state-intro">
+                        Pour modifier la description de l'état d'un catway, un formulaire est mis à votre 
+                        disposition avec un identifiant et l'état du catway à décrire. En cliquant sur "valider", 
+                        vous soumettez le formulaire, ce qui correspond à une requête PATCH dans l'API. Le catway 
+                        ciblé (grâce à l'identifiant) a son état de mis à jour dans la base de données.
+                    </p>
+                    <h4>Requête correspondante :</h4>
+                    <p class="update-catway-state-req-description">
+                        À la soumission du formulaire (avec les champs correctement remplis), l'API envoie une 
+                        requête PATCH vers la route /dashboard/update-catway-state avec les données que vous avez 
+                        saisi.
+                    </p>
+                    <h4>Exemple de requête :</h4>
+                    <p class="update-catway-state-req-example">POST http://localhost:3000/dashboard/update-catway-state</p>
+                    <h4>Réponse :</h4>
+                    <img src="/images/update_catway_state_success.png" alt="Formulaire « Modifier la description de l'état d'un catway » avec un message de succès." class="picture">
+                </div>
+                <div class="delete-catway-tutorial">
+                    <h3>Supprimer un catway :</h3>
+                    <p class="delete-catway-intro">
+                        Pour supprimer un catway, un formulaire est mis à votre disposition avec un identifiant à 
+                        saisir. En cliquant sur "valider", vous soumettez le formulaire, ce qui correspond à une 
+                        requête DELETE dans l'API. Le catway ciblé (grâce à l'identifiant) est supprimé de la base 
+                        de données.
+                    </p>
+                    <h4>Requête correspondante :</h4>
+                    <p class="delete-catway-req-description">
+                        À la soumission du formulaire (avec le champ correctement rempli), l'API envoie une 
+                        requête DELETE vers la route /dashboard/delete-catway avec l'identifiant que vous avez 
+                        saisi.
+                    </p>
+                    <h4>Exemple de requête :</h4>
+                    <p class="delete-catway-req-example">POST http://localhost:3000/dashboard/delete-catway</p>
+                    <h4>Réponse :</h4>
+                    <img src="/images/delete_catway_success.png" alt="Formulaire « Supprimer un catway » avec un message de succès." class="picture">
+                </div>
+                <div class="display-catway-details-tutorial">
+                    <h3>Afficher les détails d'un catway :</h3>
+                    <p class="display-catway-details-intro">
+                        Pour afficher les détails d'un catway, un formulaire est mis à votre disposition avec 
+                        une liste déroulante. En cliquant sur "Sélectionnez un numéro", et en choisissant un 
+                        numéro de catway, vous exécuté un script Javascript dynamique qui affiche les données 
+                        du catway sélectionné.
+                    </p>
+                    <h4>Requête correspondante :</h4>
+                    <p class="display-catway-details-req-description">
+                        Au clic d'un catway, l'API envoie une requête GET vers la route 
+                        /dashboard/catway-details/:catwayNumber. Le script Javascript affiche ensuite dynamiquement 
+                        les données correspondantes.
+                    </p>
+                    <h4>Exemple de requête :</h4>
+                    <p class="display-catway-details-req-example">GET http://localhost:3000/dashboard/catway-details/1</p>
+                    <h4>Réponse :</h4>
+                    <img src="/images/display_catway_details_success.png" alt="Formulaire « Afficher les détails d'un catway » avec es données du catway numéro 1." class="picture">
+                </div>
+            </div>
+            <div class="dashboard-reservations-tutorials-container">
+                <div class="save-reservation-tutorial">
+                    <h3>Enregistrer une réservation :</h3>
+                    <p class="save-reservation-intro">
+                        Pour enregistrer une réservation, un formulaire est mis à votre disposition avec le numéro 
+                        du catway, le nom du client, le nom du bateau amarré, la date de début de réservation et la 
+                        date de fin de réservation à saisir. En cliquant sur "valider", vous soumettez le formulaire, 
+                        ce qui correspond à une requête POST dans l'API. Une nouvelle réservation est ensuite créée 
+                        dans la base de données.
+                    </p>
+                    <h4>Requête correspondante :</h4>
+                    <p class="save-reservation-req-description">
+                        À la soumission du formulaire (avec les champs correctement remplis), l'API envoie une 
+                        requête POST vers la route /dashboard/save-reservation avec les données que vous avez saisi.
+                    </p>
+                    <h4>Exemple de requête :</h4>
+                    <p class="save-reservation-req-example">POST http://localhost:3000/dashboard/save-reservation</p>
+                    <h4>Réponse :</h4>
+                    <img src="/images/save_reservation_success.png" alt="Formulaire « Enregistrer une réservation » avec un message de succès." class="picture">
+                </div>
+                <div class="delete-reservation-tutorial">
+                    <h3>Supprimer une réservation :</h3>
+                    <p class="delete-reservation-intro">
+                        Pour supprimer une réservation, un formulaire est mis à votre disposition avec un identifiant 
+                        à saisir. En cliquant sur "valider", vous soumettez le formulaire, ce qui correspond à une 
+                        requête DELETE dans l'API. La réservation ciblée (grâce à l'identifiant) est supprimée dans la 
+                        base de données.
+                    </p>
+                    <h4>Requête correspondante :</h4>
+                    <p class="delete-reservation-req-description">
+                        À la soumission du formulaire (avec les champs correctement remplis), l'API envoie une 
+                        requête DELETE vers la route /dashboard/delete-reservation avec l'identifiant que vous avez saisi.
+                    </p>
+                    <h4>Exemple de requête :</h4>
+                    <p class="delete-reservation-req-example">POST http://localhost:3000/dashboard/delete-reservation</p>
+                    <h4>Réponse :</h4>
+                    <img src="/images/delete_reservation_success.png" alt="Formulaire « Supprimer une réservation » avec un message de succès." class="picture">
+                </div>
+                <div class="display-reservation-details-tutorial">
+                    <h3>Afficher les détails d'une réservation :</h3>
+                    <p class="display-reservation-details-intro">
+                        Pour afficher les détails d'une réservation, un formulaire est mis à votre disposition avec 
+                        une liste déroulante. En cliquant sur "Sélectionnez une réservation", et en choisissant un 
+                        nom de client, vous exécuté un script Javascript dynamique qui affiche les données de la  
+                        réservation sélectionnée.
+                    </p>
+                    <h4>Requête correspondante :</h4>
+                    <p class="display-reservation-details-req-description">
+                        Au clic d'un catway, l'API envoie une requête GET vers la route 
+                        /dashboard/reservation-details/:reservationId. Le script Javascript affiche ensuite dynamiquement 
+                        les données correspondantes.
+                    </p>
+                    <h4>Exemple de requête :</h4>
+                    <p class="display-reservation-details-req-example">
+                        GET http://localhost:3000/dashboard/reservation-details/01a2345bc6789d0e123f4g5h
+                    </p>
+                    <h4>Réponse :</h4>
+                    <img src="/images/display_reservation_details_success.png" alt="Formulaire « Afficher les détails d'une réservation » avec les données de John Doe." class="picture">
+                </div>
+            </div>
+        </div>
+        <div class="catways-tutorials-container">
+            <div class="get-catways-list-tutorial">
+                <h3>Accéder à la liste des catways :</h3>
+                <p class="get-catways-list-intro">
+                    Pour accéder à la liste des catways, il suffit de cliquer sur "Catways" dans l'en-tête 
+                    de l'application. En faisant cela, vous accédez à la page /catways.
+                </p>
+                <h4>Requête correspondante :</h4>
+                <p class="get-catways-list-req-description">
+                    La page /catways correspond à une requête GET dans l'API qui récupérer les catways en base 
+                    de données et va rendre un template côté serveur avec l'ensemble des catways. Le template 
+                    de cette page ne rend que les numéros des catways.
+                </p>
+                <h4>Exemple de requête :</h4>
+                <p class="get-catways-list-req-example">GET http://localhost:3000/catways</p>
+                <h4>Réponse :</h4>
+                <img src="/images/catways_page.png" alt="Page /catways" class="picture">
+            </div>
+            <div class="get-catways-details-tutorial">
+                <h3>Accéder aux détails d'un catway en particulier :</h3>
+                <p class="get-catways-details-intro">
+                    Pour accéder aux détails d'un catway en particulier, il suffit de cliquer sur le numéro de 
+                    catway de votre choix sur la page /catways. En faisant cela, vous accédez à la page 
+                    /catways/:id. Celle-ci rend toutes les données du catway choisi.
+                </p>
+                <h4>Requête correspondante :</h4>
+                <p class="get-catways-details-req-description">
+                    La page /catways/:id correspond à une requête GET dans l'API qui récupère les données 
+                    du catway sélectionné en fonction de son identifiant.
+                </p>
+                <h4>Exemple de requête :</h4>
+                <p class="get-catways-details-req-example">GET http://localhost:3000/catways/01a2345bc6789d0e123f4g6h</p>
+                <h4>Réponse :</h4>
+                <img src="/images/catway_details_page.png" alt="Page « Détails d'un catway en particulier »" class="picture">
+            </div>
+        </div>
+        <div class="reservations-tutorials-container">
+            <div class="get-all-reservations-tutorial">
+                <h3>Accéder à la liste de toutes les réservations :</h3>
+                <p class="get-all-reservations-intro">
+                    Pour accéder à toutes les réservations, il suffit de cliquer sur "Réservations" puis 
+                    sur "Voir toutes les réservations". En faisant cela, vous accédez à la page 
+                    /catways/allReservations. Celle-ci rend toutes les données de toutes les réservations.
+                </p>
+                <h4>Requête correspondante :</h4>
+                <p class="get-all-reservations-req-description">
+                    La page /catways/allReservations correspond à une requête GET dans l'API qui récupère les données 
+                    de toutes les réservations existantes en base de données.
+                </p>
+                <h4>Exemple de requête :</h4>
+                <p class="get-all-reservations-req-example">GET http://localhost:3000/catways/allReservations</p>
+                <h4>Réponse :</h4>
+                <img src="/images/all_reservations_page.png" alt="Page « Toutes les réservations »" class="picture">
+            </div>
+            <div class="get-reservations-for-a-catway-tutorial">
+                <h3>Accéder à la liste des réservations d'un catway :</h3>
+                <p class="get-reservations-for-a-catway-intro">
+                    Pour accéder à la liste des réservations d'un catway, il suffit de cliquer sur "Réservations" puis 
+                    sur l'un des catways de la liste déroulante (exemple : "Catway 1"). En faisant cela, vous accédez à 
+                    la page /catways/:catwayNumber/reservations. Celle-ci rend les données de toutes les réservations 
+                    pour le catway sélectionné.
+                </p>
+                <h4>Requête correspondante :</h4>
+                <p class="get-reservations-for-a-catway-req-description">
+                    La page /catways/:catwayNumber/reservations correspond à une requête GET dans l'API qui récupère les 
+                    données des réservations d'un catway en fonction de son numéro de catway.
+                </p>
+                <h4>Exemple de requête :</h4>
+                <p class="get-reservations-for-a-catway-req-example">GET http://localhost:3000/catways/1/reservations</p>
+                <h4>Réponse :</h4>
+                <img src="/images/reservations_for_a_catway_page.png" alt="Page de réservations du catway 1" class="picture">
+            </div>
+            <div class="get-reservation-details-tutorial">
+                <h3>Accéder aux détails d'une réservation :</h3>
+                <p class="get-reservation-details-intro">
+                    Pour accéder aux détails d'une réservation, il suffit de cliquer sur le nom du client d'une 
+                    réservation lorsque vous êtes sur la page /catways/:catwayNumber/reservations. En faisant cela, vous 
+                    accédez à la page /catways/:catwayNumber/reservations/:idReservation. Celle-ci rend toutes les données 
+                    de la réservation que vous avez sélectionné.
+                </p>
+                <h4>Requête correspondante :</h4>
+                <p class="get-reservation-details-req-description">
+                    La page /catways/:catwayNumber/reservations/:idReservation correspond à une requête GET dans l'API qui 
+                    récupère les données de la réservation sélectionnée en fonction de son identifiant.
+                </p>
+                <h4>Exemple de requête :</h4>
+                <p class="get-reservation-details-req-example">
+                    GET http://localhost:3000/catways/1/reservations/01a2345bc6789d0e123f4g7h
+                </p>
+                <h4>Réponse :</h4>
+                <img src="/images/reservation_details_page.png" alt="Page « Réservation » d'un réservation en particulier" class="picture">
+            </div>
+        </div>
+    </div>
+    <div class="glossary">
+        <h2>Glossaire</h2>
+        <h3>Définitions :</h3>
+        <div class="def-container">
+            <h4>API (Application Programming Interface) :</h4>
+            <p>
+                Interface de programmation d'application. C'est un ensemble de définitions et de protocoles qui permettent à 
+                différents logiciels de communiquer entre eux.
+            </p>
+        </div>
+        <div class="def-container">
+            <h4>REST (Representational State Transfer) :</h4>
+            <p>
+                Style d'architecture pour les systèmes hypermédia distribués, utilisé principalement dans le développement d'API 
+                web. REST se base sur des opérations standardisées sur les ressources via HTTP.
+            </p>
+        </div>
+        <div class="def-container">
+            <h4>Catway :</h4>
+            <p>
+                Se traduit par "passerelle" en français.
+            </p>
+        </div>
+        <div class="def-container">
+            <h4>Endpoints :</h4>
+            <p>
+                Points d'extrémité des API REST, représentant des URI (Uniform Resource Identifier) spécifiques qui sont utilisés 
+                pour accéder aux ressources.
+            </p>
+        </div>
+        <div class="def-container">
+            <h4>URI (Uniform Resource Identifier) :</h4>
+            <p>
+                Identifiant de ressource uniforme. Il s'agit d'une chaîne de caractères permettant d'identifier de manière unique 
+                une ressource sur un réseau, comme une page web, une image ou un service API. Une URL (Uniform Resource Locator) 
+                est un type spécifique d'URI qui indique également l'emplacement de la ressource et la manière d'y accéder.
+            </p>
+        </div>
+        <div class="def-container">
+            <h4>Authentification :</h4>
+            <p>
+                Processus de vérification de l'identité d'un utilisateur ou d'un système. Il permet de s'assurer que l'accès aux 
+                données ou aux services est autorisé.
+            </p>
+        </div>
+        <div class="def-container">
+            <h4>Token :</h4>
+            <p>
+                Jeton d'authentification, généralement une chaîne de caractères, utilisé pour identifier de manière sécurisée 
+                l'utilisateur lorsqu'il accède à un service.
+            </p>
+        </div>
+        <div class="def-container">
+            <h4>JWT (JSON Web Token) :</h4>
+            <p>
+                Format ouvert permettant de représenter des réclamations de manière sécurisée entre deux parties, souvent utilisé 
+                pour l'authentification dans les applications web.
+            </p>
+        </div>
+        <div class="def-container">
+            <h4>Dashboard :</h4>
+            <p>
+                Tableau de bord en français, c'est une interface utilisateur graphique qui permet de visualiser et de gérer des 
+                informations de manière synthétique.
+            </p>
+        </div>
+        <div class="def-container">
+            <h4>Requête HTTP :</h4>
+            <p>
+                Demande envoyée par un client à un serveur pour obtenir des données ou déclencher une action.
+            </p>
+        </div>
+        <div class="def-container">
+            <h4>Réponse HTTP :</h4>
+            <p>
+                Réaction envoyée par un serveur à une requête HTTP, contenant généralement les données demandées ou une confirmation de 
+                l'action effectuée.         
+            </p>
+        </div>
+        <div class="def-container">
+            <h4>Verbes HTTP :</h4>
+            <p>
+                Mots définissant l'action à effectuer sur une ressource lors d'une requête à une API.
+            </p>
+            <h5>Verbes HTTP utilisés dans l'API :</h5>
+            <table>
+                <thead>
+                    <tr>
+                        <th class="get-description">Récupérer des données</th>
+                        <th class="post-description"> Créer une nouvelle ressource</th>
+                        <th class="put-description">Remplacer une ressource existante</th>
+                        <th class="patch-description">Modifier partiellement des données existantes</th>
+                        <th class="delete-description">Supprimer des données existantes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="http-verb">GET</td>
+                        <td class="http-verb">POST</td>
+                        <td class="http-verb">PUT</td>
+                        <td class="http-verb">PATCH</td>
+                        <td class="http-verb">DELETE</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="def-container">
+            <h4>Template :</h4>
+            <p>
+                Modèle de document ou de page pré-formaté, utilisé souvent pour générer dynamiquement du contenu.         
+            </p>
+        </div>
+        <div class="def-container">
+            <h4>Cookies :</h4>
+            <p>
+                Petits fichiers texte envoyés par un serveur web et stockés sur le navigateur de l'utilisateur, utilisés pour conserver 
+                des informations d'état entre les sessions HTTP.
+            </p>
+        </div>
+        <div class="def-container">
+            <h4>Identifiant :</h4>
+            <p>
+                Information unique associée à un utilisateur ou une entité, utilisée pour l'authentification ou l'identification.
+            </p>
+        </div>
+        <div class="def-container">
+            <h4>Script :</h4>
+            <p>
+                Séquence d'instructions ou de commandes écrites pour être exécutées par un interpréteur de langage de programmation.
+            </p>
+        </div>
+        <div class="def-container">
+            <h4>Javacript :</h4>
+            <p>
+                Langage de programmation utilisé principalement pour créer des pages web interactives.
+            </p>
+        </div>
+    </div>
+</div>

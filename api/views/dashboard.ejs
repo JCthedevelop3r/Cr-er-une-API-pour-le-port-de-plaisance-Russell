@@ -1,15 +1,12 @@
 <div class="dashboard-container">
   <div class="top-of-page-container">
     <h1><%= title%></h1>
-    <a
-      href="/documentation"
-      class="link-api-documentation"
-    >
-      <button>Voir la documentation</button>
+    <a href="/documentation" class="link-api-documentation">
+      <button class="documentation-btn">Voir la documentation</button>
     </a>
     <div class="link-list-pages-container">
       <a href="/catways">Voir la liste des catways</a>
-      <a href="">Voir la liste des réservations</a>
+      <a href="/catways/allReservations">Voir la liste des réservations</a>
     </div>
   </div>
   <div class="bottom-of-the-page-container">
@@ -35,12 +32,12 @@
           </button>
         </div>
         <div class="btn-form-delete-catway-state-container">
-          <button class="btn-form-delete-catway-state">
+          <button class="btn-form-delete-catway">
             Supprimer un catway
           </button>
         </div>
-        <div class="btn-form-catway-details-state-container">
-          <button class="btn-form-catway-details-state">
+        <div class="btn-form-display-catway-details-container">
+          <button class="btn-form-display-catway-details">
             Afficher les détails d'un catway
           </button>
         </div>
@@ -62,266 +59,307 @@
           </button>
         </div>
       </div>
-      <div class="form-list">
-        <div class="users-form-list-container">
-          <div class="form-create-user-container">
-            <h2 class="h2-form-create-user">Créer un utilisateur</h2>
-            <% if (successCreateUser) { %>
-              <div class="success-message" style="color: green">
-                <%= successCreateUser %>
-              </div>
-            <% } %>
-            <% if (errorCreateUser) { %>
-              <div class="error-message" style="color: red">
-                <%= errorCreateUser %>
-              </div>
-            <% } %>
-            <form
-              action="/dashboard/create-user"
-              method="post"
-              class="form-create-user"
-            >
-              <label for="nameCreateUser">Nom :</label>
-              <input type="text" name="name" id="nameCreateUser" required />
-              <label for="emailCreateUser">E-mail :</label>
-              <input type="email" name="email" id="emailCreateUser" required />
-              <label for="passwordCreateUser">Mot de passe :</label>
-              <input type="password" name="password" id="passwordCreateUser" required />
-              <button type="submit">Valider</button>
-            </form>
+    </div>
+    <div class="form-list">
+      <div class="users-form-list-container">
+        <div class="form-create-user-container" id="createUserForm">
+          <h2 class="h2-form-create-user">Créer un utilisateur</h2>
+          <% if (successCreateUser) { %>
+          <div class="success-message" style="color: green">
+            <%= successCreateUser %>
           </div>
-          <div class="form-update-user-container">
-            <h2 class="h2-form-update-user">Modifier un utilisateur</h2>
-            <% if (successUpdateUser) { %>
-              <div class="success-message" style="color: green">
-                <%= successUpdateUser %>
-              </div>
-            <% } %>
-            <% if (errorUpdateUser) { %>
-              <div class="error-message" style="color: red">
-                <%= errorUpdateUser %>
-              </div>
-            <% } %>
-            <form
-              action="/dashboard/update-user"
-              method="post"
-              class="form-update-user"
-            >
-              <input type="hidden" name="_method" value="PATCH" />
-              <label for="userIdUpdateUserDeleteUser">Entrez l'identifiant :</label>
-              <input type="text" name="userId" id="userIdUpdateUserDeleteUser" required />
-              <label for="nameUpdateUserDeleteUser">Nom :</label>
-              <input type="text" name="name" id="nameUpdateUserDeleteUser" required />
-              <label for="emailUpdateUserDeleteUser">E-mail :</label>
-              <input type="email" name="email" id="emailUpdateUserDeleteUser" required />
-              <button type="submit">Valider</button>
-            </form>
+          <% } %> <% if (errorCreateUser) { %>
+          <div class="error-message" style="color: red">
+            <%= errorCreateUser %>
           </div>
-          <div class="form-delete-user-container">
-            <h2 class="h2-form-delete-user">Supprimer un utilisateur</h2>
-            <% if (successDeleteUser) { %>
-              <div class="success-message" style="color: green">
-                <%= successDeleteUser %>
-              </div>
-            <% } %>
-            <% if (errorDeleteUser) { %>
-              <div class="error-message" style="color: red">
-                <%= errorDeleteUser %>
-              </div>
-            <% } %>
-            <form
-              action="/dashboard/delete-user"
-              method="post"
-              class="form-delete-user"
-            >
-              <input type="hidden" name="_method" value="DELETE" />
-              <label for="userIdDeleteUser">Entrez l'identifiant :</label>
-              <input type="text" name="userId" id="userIdDeleteUser" required />
-              <button type="submit">Valider</button>
-            </form>
+          <% } %>
+          <form
+            action="/dashboard/create-user"
+            method="post"
+            class="form-create-user"
+          >
+            <label for="nameCreateUser">Nom :</label>
+            <input type="text" name="name" id="nameCreateUser" required />
+            <label for="emailCreateUser">E-mail :</label>
+            <input type="email" name="email" id="emailCreateUser" required />
+            <label for="passwordCreateUser">Mot de passe :</label>
+            <input
+              type="password"
+              name="password"
+              id="passwordCreateUser"
+              required
+            />
+            <button type="submit">Valider</button>
+          </form>
+        </div>
+        <div class="form-update-user-container" id="updateUserForm">
+          <h2 class="h2-form-update-user">Modifier un utilisateur</h2>
+          <% if (successUpdateUser) { %>
+          <div class="success-message" style="color: green">
+            <%= successUpdateUser %>
           </div>
+          <% } %> <% if (errorUpdateUser) { %>
+          <div class="error-message" style="color: red">
+            <%= errorUpdateUser %>
+          </div>
+          <% } %>
+          <form
+            action="/dashboard/update-user"
+            method="post"
+            class="form-update-user"
+          >
+            <input type="hidden" name="_method" value="PATCH" />
+            <label for="userIdUpdateUserDeleteUser"
+              >Entrez l'identifiant :</label
+            >
+            <input
+              type="text"
+              name="userId"
+              id="userIdUpdateUserDeleteUser"
+              required
+            />
+            <label for="nameUpdateUserDeleteUser">Nom :</label>
+            <input
+              type="text"
+              name="name"
+              id="nameUpdateUserDeleteUser"
+              required
+            />
+            <label for="emailUpdateUserDeleteUser">E-mail :</label>
+            <input
+              type="email"
+              name="email"
+              id="emailUpdateUserDeleteUser"
+              required
+            />
+            <button type="submit">Valider</button>
+          </form>
+        </div>
+        <div class="form-delete-user-container" id="deleteUserForm">
+          <h2 class="h2-form-delete-user">Supprimer un utilisateur</h2>
+          <% if (successDeleteUser) { %>
+          <div class="success-message" style="color: green">
+            <%= successDeleteUser %>
+          </div>
+          <% } %> <% if (errorDeleteUser) { %>
+          <div class="error-message" style="color: red">
+            <%= errorDeleteUser %>
+          </div>
+          <% } %>
+          <form
+            action="/dashboard/delete-user"
+            method="post"
+            class="form-delete-user"
+          >
+            <input type="hidden" name="_method" value="DELETE" />
+            <label for="userIdDeleteUser">Entrez l'identifiant :</label>
+            <input type="text" name="userId" id="userIdDeleteUser" required />
+            <button type="submit">Valider</button>
+          </form>
         </div>
       </div>
-    </div>
-    <div class="catways-form-list-container">
-      <div class="form-create-catway-container">
-        <h2 class="h2-form-create-catway">Créer un catway</h2>
-        <% if (successCreateCatway) { %>
+
+      <div class="catways-form-list-container">
+        <div class="form-create-catway-container" id="createCatwayForm">
+          <h2 class="h2-form-create-catway">Créer un catway</h2>
+          <% if (successCreateCatway) { %>
           <div class="success-message" style="color: green">
             <%= successCreateCatway %>
           </div>
-        <% } %>
-        <% if (errorCreateCatway) { %>
+          <% } %> <% if (errorCreateCatway) { %>
           <div class="error-message" style="color: red">
             <%= errorCreateCatway %>
           </div>
-        <% } %>
-        <form action="/dashboard/create-catway" method="post">
-          <label for="catwayNumberCc">Numéro du catway :</label>
-          <input
-            type="text"
-            name="catwayNumber"
-            id="catwayNumberCc"
-            readonly
-          />
-          <p>Type :</p>
-          <label for="short">Court</label>
-          <input type="radio" name="type" id="short" value="short" required/>
-          <label for="long">Long</label>
-          <input type="radio" name="type" id="long" value="long" required/>
-          <label for="catwayStateCc">État :</label>
-          <textarea
-            name="catwayState"
-            id="catwayStateCc"
-            rows="4"
-            cols="50"
-            placeholder="Décrivez l'état du catway..."
-            required
-          ></textarea>
-          <button type="submit">Valider</button>
-        </form>
-      </div>
-      <div class="form-catway-state-container">
-        <h2 class="h2-form-catway-state">
-          Modifier la description de l'état d'un catway
-        </h2>
-        <% if (successUpdateCatway) { %>
+          <% } %>
+          <form action="/dashboard/create-catway" method="post">
+            <label for="catwayNumberCc">Numéro du catway :</label>
+            <input
+              type="text"
+              name="catwayNumber"
+              id="catwayNumberCc"
+              readonly
+            />
+            <p>Type :</p>
+            <label for="short">Court</label>
+            <input type="radio" name="type" id="short" value="short" required />
+            <label for="long">Long</label>
+            <input type="radio" name="type" id="long" value="long" required />
+            <label for="catwayStateCc">État :</label>
+            <textarea
+              name="catwayState"
+              id="catwayStateCc"
+              rows="4"
+              cols="50"
+              placeholder="Décrivez l'état du catway..."
+              required
+            ></textarea>
+            <button type="submit">Valider</button>
+          </form>
+        </div>
+        <div class="form-catway-state-container" id="updateCatwayStateForm">
+          <h2 class="h2-form-catway-state">
+            Modifier la description de l'état d'un catway
+          </h2>
+          <% if (successUpdateCatway) { %>
           <div class="success-message" style="color: green">
             <%= successUpdateCatway %>
           </div>
-        <% } %>
-        <% if (errorUpdateCatway) { %>
+          <% } %> <% if (errorUpdateCatway) { %>
           <div class="error-message" style="color: red">
             <%= errorUpdateCatway %>
           </div>
-        <% } %>
-        <form action="/dashboard/update-catway-state" method="post">
-          <input type="hidden" name="_method" value="PATCH" />
-          <label for="catwayIdUc">ID catway :</label>
-          <input type="text" name="catwayId" id="catwayIdUc" required />
-          <label for="catwayStateUc">État :</label>
-          <textarea
-            name="catwayState"
-            id="catwayStateUc"
-            rows="4"
-            cols="50"
-            placeholder="Décrivez l'état du catway..."
-            required
-          ></textarea>
-          <button type="submit">Valider</button>
-        </form>
-      </div>
-      <div class="form-delete-catway-container">
-        <h2 class="h2-delete-catway">Supprimer un catway</h2>
-        <% if (successDeleteCatway) { %>
+          <% } %>
+          <form action="/dashboard/update-catway-state" method="post">
+            <input type="hidden" name="_method" value="PATCH" />
+            <label for="catwayIdUc">ID catway :</label>
+            <input type="text" name="catwayId" id="catwayIdUc" required />
+            <label for="catwayStateUc">État :</label>
+            <textarea
+              name="catwayState"
+              id="catwayStateUc"
+              rows="4"
+              cols="50"
+              placeholder="Décrivez l'état du catway..."
+              required
+            ></textarea>
+            <button type="submit">Valider</button>
+          </form>
+        </div>
+        <div class="form-delete-catway-container" id="deleteCatwayForm">
+          <h2 class="h2-delete-catway">Supprimer un catway</h2>
+          <% if (successDeleteCatway) { %>
           <div class="success-message" style="color: green">
             <%= successDeleteCatway %>
           </div>
-        <% } %>
-        <% if (errorDeleteCatway) { %>
+          <% } %> <% if (errorDeleteCatway) { %>
           <div class="error-message" style="color: red">
             <%= errorDeleteCatway %>
           </div>
-        <% } %>
-        <form action="/dashboard/delete-catway" method="post">
-          <input type="hidden" name="_method" value="DELETE" />
-          <label for="catwayNumberDc">Numéro du catway :</label>
-          <input type="text" name="catwayNumber" id="catwayNumberDc" required />
-          <button type="submit">Valider</button>
-        </form>
-      </div>
-      <div class="form-display-catway-details-container">
-        <h2 class="h2-display-catway-details">
-          Afficher les détails d'un catway
-        </h2>
-        <div class="error-message-dcd" style="color: red"></div>
-        <label for="catwayNumberDcd">Numéro du catway :</label>
-        <select name="catwayNumber" id="catwayNumberDcd" required>
-          <option disabled selected>Sélectionnez un numéro</option>
-          <% catways.forEach(catway => { %>
-          <option value="<%= catway.catwayNumber %>">
-            <%= catway.catwayNumber %>
-          </option>
-          <% }); %>
-        </select>
-
-        <h3>Type :</h3>
-        <p id="catwayTypeDcd"></p>
-
-        <h3>État :</h3>
-        <p id="catwayStateDcd"></p>
-      </div>
-    </div>
-    <div class="reservations-form-list-container">
-      <div class="form-save-reservation-container">
-        <h2 class="h2-save-reservation">Enregistrer une réservation</h2>
-        <% if (successSaveReservation) { %>
-          <div class="success-message" style="color: green">
-            <%= successSaveReservation %>
-          </div>
-        <% } %>
-        <% if (errorSaveReservation) { %>
-          <div class="error-message" style="color: red">
-            <%= errorSaveReservation %>
-          </div>
-        <% } %>
-        <form action="/dashboard/save-reservation" method="post">
-          <label for="catwayNumberSr">Numéro du catway :</label>
-          <input type="text" name="catwayNumber" id="catwayNumberSr" required />
-          <label for="clientNameSr">Nom du client :</label>
-          <input type="text" name="clientName" id="clientNameSr" required />
-          <label for="boatNameSr">Nom du bateau amarré :</label>
-          <input type="text" name="boatName" id="boatNameSr" required />
-          <label for="checkInSr">Date de début de réservation :</label>
-          <input type="date" name="checkIn" id="checkInSr" required />
-          <label for="checkOutSr">Date de fin de réservation :</label>
-          <input type="date" name="checkOut" id="checkOutSr" required />
-          <button type="submit">Valider</button>
-        </form>
-      </div>
-      <div class="form-delete-reservation-container">
-        <h2>Supprimer une réservation</h2>
-        <% if (successDeleteReservation) { %>
-          <div class="success-message" style="color: green">
-            <%= successDeleteReservation %>
-          </div>
-        <% } %>
-        <% if (errorDeleteReservation) { %>
-          <div class="error-message" style="color: red">
-            <%= errorDeleteReservation %>
-          </div>
-        <% } %>
-        <form action="/dashboard/delete-reservation" method="post">
-          <input type="hidden" name="_method" value="DELETE" />
-          <label for="reservationIdDr">ID :</label>
-          <input type="text" name="reservationId" id="reservationIdDr" required />
-          <button type="submit">Valider</button>
-        </form>
-      </div>
-      <div class="form-display-reservation-details-container">
-        <h2>Afficher les détails d'une réservation</h2>
-        <div class="error-message-drd" style="color: red"></div>
-        <form>
-          <label for="reservationIdDrd">Réservation :</label>
-          <select name="reservationId" id="reservationIdDrd">
-            <option value="" disabled selected>Sélectionnez une réservation</option>
-            <% reservations.forEach(reservation => { %>
-            <option value="<%= reservation._id %>">
-              <%= reservation.clientName %>
+          <% } %>
+          <form action="/dashboard/delete-catway" method="post">
+            <input type="hidden" name="_method" value="DELETE" />
+            <label for="catwayNumberDc">Numéro du catway :</label>
+            <input
+              type="text"
+              name="catwayNumber"
+              id="catwayNumberDc"
+              required
+            />
+            <button type="submit">Valider</button>
+          </form>
+        </div>
+        <div
+          class="form-display-catway-details-container"
+          id="displayCatwayDetailsForm"
+        >
+          <h2 class="h2-display-catway-details">
+            Afficher les détails d'un catway
+          </h2>
+          <div class="error-message-dcd" style="color: red"></div>
+          <label for="catwayNumberDcd">Numéro du catway :</label>
+          <select name="catwayNumber" id="catwayNumberDcd" required>
+            <option disabled selected>Sélectionnez un numéro</option>
+            <% catways.forEach(catway => { %>
+            <option value="<%= catway.catwayNumber %>">
+              <%= catway.catwayNumber %>
             </option>
             <% }); %>
           </select>
-          <h3>Numéro du catway :</h3>
-          <p id="catwayNumberDrd"></p>
-          <h3>Nom du client :</h3>
-          <p id="clientNameDrd"></p>
-          <h3>Nom du bateau :</h3>
-          <p id="boatNameDrd"></p>
-          <h3>Date de début de réservation :</h3>
-          <p id="checkInDrd"></p>
-          <h3>Date de fin de réservation :</h3>
-          <p id="checkOutDrd"></p>
-        </form>
+
+          <h3>Type :</h3>
+          <p id="catwayTypeDcd"></p>
+
+          <h3>État :</h3>
+          <p id="catwayStateDcd"></p>
+        </div>
+      </div>
+      <div class="reservations-form-list-container">
+        <div class="form-save-reservation-container" id="saveReservationForm">
+          <h2 class="h2-save-reservation">Enregistrer une réservation</h2>
+          <% if (successSaveReservation) { %>
+          <div class="success-message" style="color: green">
+            <%= successSaveReservation %>
+          </div>
+          <% } %> <% if (errorSaveReservation) { %>
+          <div class="error-message" style="color: red">
+            <%= errorSaveReservation %>
+          </div>
+          <% } %>
+          <form action="/dashboard/save-reservation" method="post">
+            <label for="catwayNumberSr">Numéro du catway :</label>
+            <input
+              type="text"
+              name="catwayNumber"
+              id="catwayNumberSr"
+              required
+            />
+            <label for="clientNameSr">Nom du client :</label>
+            <input type="text" name="clientName" id="clientNameSr" required />
+            <label for="boatNameSr">Nom du bateau amarré :</label>
+            <input type="text" name="boatName" id="boatNameSr" required />
+            <label for="checkInSr">Date de début de réservation :</label>
+            <input type="date" name="checkIn" id="checkInSr" required />
+            <label for="checkOutSr">Date de fin de réservation :</label>
+            <input type="date" name="checkOut" id="checkOutSr" required />
+            <button type="submit">Valider</button>
+          </form>
+        </div>
+        <div
+          class="form-delete-reservation-container"
+          id="deleteReservationForm"
+        >
+          <h2>Supprimer une réservation</h2>
+          <% if (successDeleteReservation) { %>
+          <div class="success-message" style="color: green">
+            <%= successDeleteReservation %>
+          </div>
+          <% } %> <% if (errorDeleteReservation) { %>
+          <div class="error-message" style="color: red">
+            <%= errorDeleteReservation %>
+          </div>
+          <% } %>
+          <form action="/dashboard/delete-reservation" method="post">
+            <input type="hidden" name="_method" value="DELETE" />
+            <label for="reservationIdDr">ID :</label>
+            <input
+              type="text"
+              name="reservationId"
+              id="reservationIdDr"
+              required
+            />
+            <button type="submit">Valider</button>
+          </form>
+        </div>
+        <div
+          class="form-display-reservation-details-container"
+          id="displayReservationDetailsForm"
+        >
+          <h2>Afficher les détails d'une réservation</h2>
+          <div class="error-message-drd" style="color: red"></div>
+          <form>
+            <label for="reservationIdDrd">Réservation :</label>
+            <select name="reservationId" id="reservationIdDrd">
+              <option value="" disabled selected>
+                Sélectionnez une réservation
+              </option>
+              <% reservations.forEach(reservation => { %>
+              <option value="<%= reservation._id %>">
+                <%= reservation.clientName %>
+              </option>
+              <% }); %>
+            </select>
+            <h3>Numéro du catway :</h3>
+            <p id="catwayNumberDrd"></p>
+            <h3>Nom du client :</h3>
+            <p id="clientNameDrd"></p>
+            <h3>Nom du bateau :</h3>
+            <p id="boatNameDrd"></p>
+            <h3>Date de début de réservation :</h3>
+            <p id="checkInDrd"></p>
+            <h3>Date de fin de réservation :</h3>
+            <p id="checkOutDrd"></p>
+          </form>
+        </div>
       </div>
     </div>
   </div>
