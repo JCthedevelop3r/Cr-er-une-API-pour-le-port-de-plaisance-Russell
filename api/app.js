@@ -1,4 +1,4 @@
-require("dotenv").config();  // Charger les variables d'environnement dès le début
+require("dotenv").config();
 const express = require("express");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");

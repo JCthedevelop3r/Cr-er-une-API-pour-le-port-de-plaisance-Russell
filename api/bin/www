@@ -7,6 +7,7 @@
 var app = require("../app");
 var debug = require("debug")("api:server");
 var http = require("http");
+const { exec } = require("child_process");
 
 /**
  * Get port from environment and store in Express.
@@ -27,6 +28,14 @@ var server = http.createServer(app);
 
 server.listen(port, () => {
   console.log(`🚀 Server running at http://localhost:${port}`);
+});
+// Permet de lancer les tests après le démarrage du serveur
+exec("npm test", (err, stdout, stderr) => {
+  if (err) {
+    console.error(`Erreur lors de l'exécution des tests :\n${stderr}`);
+    return;
+  }
+  console.log(`Résultats des tests :\n${stdout}`);
 });
 server.on("error", onError);
 server.on("listening", onListening);
