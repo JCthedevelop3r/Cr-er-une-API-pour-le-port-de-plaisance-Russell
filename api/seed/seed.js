@@ -15,6 +15,7 @@ const User = require("../models/user");
 const catwaysData = require("./catways.json");
 const reservationsData = require("./reservations.json");
 const usersData = require("./users.json");
+const bcrypt = require("bcryptjs")
 
 /**
  * Fonction asynchrone pour peupler la base de données avec les données des fichiers JSON.
@@ -39,10 +40,18 @@ async function seedDatabase() {
       await Reservation.deleteMany({});
       await User.deleteMany({});
 
+      // Hash les mots de passe avant insertion
+      const usersWithHashedPasswords = await Promise.all(
+        usersData.map(async (user) => ({
+            ...user,
+            password: await bcrypt.hash(user.password, 10),
+        }))
+      );
+
       // Insertion des nouvelles données dans les collections
       await Catway.insertMany(catwaysData);
       await Reservation.insertMany(reservationsData);
-      await User.insertMany(usersData);
+      await User.insertMany(usersWithHashedPasswords);
 
       console.log("✅ BDD peuplée avec succès !");
     } catch (err) {
