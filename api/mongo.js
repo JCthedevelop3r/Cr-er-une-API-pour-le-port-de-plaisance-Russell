@@ -12,7 +12,7 @@ exports.initClientDbConnection = async () => {
       connectTimeoutMS: 30000,
       socketTimeoutMS: 45000,
     });
-    console.log("connected");
+    console.log("✅ Connexion MongoDB réussie !");
   } catch (error) {
     console.log(error);
     throw error;

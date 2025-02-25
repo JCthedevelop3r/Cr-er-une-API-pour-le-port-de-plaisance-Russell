@@ -15,6 +15,18 @@ const mongodb = require("./mongo");
 
 mongodb.initClientDbConnection();
 
+async function testMongoConnection() {
+  try {
+    await mongodb.client.connect(); // Vérifie la connexion MongoDB
+    console.log("✅ Connexion MongoDB réussie !");
+  } catch (error) {
+    console.error("❌ Erreur de connexion MongoDB :", error.message);
+    process.exit(1); // Stoppe l’application si MongoDB est inaccessible
+  }
+}
+
+testMongoConnection(); // Lance le test avant de démarrer l’application
+
 const app = express();
 
 app.set("view engine", "ejs");
