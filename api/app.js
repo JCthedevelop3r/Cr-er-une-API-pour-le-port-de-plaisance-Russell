@@ -17,7 +17,7 @@ mongodb.initClientDbConnection();
 
 async function testMongoConnection() {
   try {
-    await mongodb.client.connect(); // Vérifie la connexion MongoDB
+    await mongodb.clientOptions.connect(); // Vérifie la connexion MongoDB
     console.log("✅ Connexion MongoDB réussie !");
   } catch (error) {
     console.error("❌ Erreur de connexion MongoDB :", error.message);
